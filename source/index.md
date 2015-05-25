@@ -143,7 +143,7 @@ width | int | yes | 227 | Resize images to width ("image" only)
 height | int | yes | 227 | Resize images to height ("image" only)
 bw | bool | yes | false | Treat images as black & white
 
-TODO: see section on Connectors
+See the section on [Connectors](/#connectors) for more details.
 
 - Output object
 

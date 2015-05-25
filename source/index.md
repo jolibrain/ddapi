@@ -19,11 +19,36 @@ search: true
 
 Welcome to the DeepDetect API!
 
-TODO: main principles:
-- server
-- services and input / output connectors
-- ML libraries and their options
-- train / predict
+DeepDetect is a Machine Learning server. At this stage, it provides a flexible API to train deep neural networks and use them where they are needed.
+
+## Principles
+
+The Open Source software provides a server, an API, and the underlying Machine Learning procedures for training statistical models. The REST API defines a set of resources and options in order to access and command the server over a network.
+
+### Architecture
+
+The software defines a very simple flow, from data to the statistical model and the final application. The main elements and vocabulary are in that order:
+
+* `data` or `dataset`: images or numerical data (text is forthcoming)
+* `input connector`: entry point for data into DeepDetect. Specialized versions handle different data types (e.g. images or CSV)
+* `model`: repository that holds all the files necessary for building and usage of a statistical model such as a neural net
+* `service`: the central holder of models and connectors, living in memory and servicing the machine learning capabilities through the API. While the `model` can be held permanently on disk, a `service` is spawn around it and destroyed at will
+* `training`: the computational phase that uses a dataset to build a statistical model with predictive abilities on statistically relevant data
+* `prediction`: the computational phase that uses a trained statistical model in order to make a guess about one or more samples of data
+* `output connector`: the DeepDetect output, that supports templates so that the output can be easily customized by the user in order to fit in the final application
+
+### API Principles
+
+The main idea behind the API is that it allows users to spawn Machine Learning `services`, each serving its own purpose, and to interact with them.
+
+The REST API builds around four resources:
+
+* `/info`: yields the general information about the server and the services currently being active on it
+* `/services`: yields access to creation and destruction of Machine Learning services.
+* `/train`: controls the resources for the potentially long computational phase of building the statistical model from a `dataset`
+* `/predict`: takes data in, and uses a trained statistical model to make predictions over some properties of the data
+
+Each of the resources are detailed below, along with their options and examples to be tested on the command line.
 
 # Info
 
@@ -130,9 +155,9 @@ TODO: best, etc...
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
+nclasses | int | no | N/A | Number of output classes ("supervised" service type)
 gpu | bool | yes | false | Whether to use GPU
 gpuid | int | yes | 0 | GPU id
-nclasses | int | yes | auto | Number of output classes ("supervised" service type)
 template | string | yes | empty | Neural network template, from "lregression", "mlp", "alexnet", "googlenet", "ninnet"
 layers | array of int | yes | [50] | Number of neurons per layer ("mlp" only)
 activation | string | yes | relu | Unit activation ("mlp" only), from "sigmoid","tanh","relu","prelu"
@@ -440,111 +465,3 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 gpu | bool | yes | false | Whether to use GPU
 gpuid | int | yes | 0 | GPU id to use
-
-# Kittens
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/3"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the cat to retrieve
-

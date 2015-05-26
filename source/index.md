@@ -146,10 +146,6 @@ bw | bool | yes | false | Treat images as black & white
 
 See the section on [Connectors](#connectors) for more details.
 
-- Output object
-
-TODO: best, etc...
-
 #### Machine learning libraries
 
 - Caffe
@@ -230,7 +226,19 @@ clear | string | yes | mem | "full", "lib" or "mem". "full" clears the model and
 
 Trains a statistical model from a dataset, the model can be further used for prediction
 
-TODO: blocking vs asynchronous jobs
+The DeepDetect server supports both blocking and asynchronous training calls. Training is often a very computational operation that can last for days in some cases. 
+
+Blocking calls block the communication with the server, and returns results once completed. They are not well suited to most machine learning tasks.
+
+Asynchronous calls run the training in the background as a separate thread (`PUT /train`). Status of the training job can be consulted live with by calling on the server (`GET /train`). The final report on an asynchronous training job is consumed by the first `GET /train` call after completion of the job. After that, the job is definitely destroyed.
+
+<aside class="notice">
+Asynchronous training calls are the default, use of blocking calls is useful for testing and debugging
+</aside>
+
+<aside class="warning">
+The current integration of the Caffe back-end for deep learning does not allow making predictions while training. However, two different services can train and predict at the same time.
+</aside>
 
 ## Launch a training job
 
@@ -339,8 +347,6 @@ Net:
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 batch_size | int | yes | N/A | Training batch size
-
-TODO: note on batch_size, test batch_size ?
 
 ## Get information on a training job
 

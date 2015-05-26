@@ -11,6 +11,7 @@ toc_footers:
 includes:
   - connectors
   - templates
+  - model_templates
   - errors
 
 search: true
@@ -160,7 +161,7 @@ layers | array of int | yes | [50] | Number of neurons per layer ("mlp" only)
 activation | string | yes | relu | Unit activation ("mlp" only), from "sigmoid","tanh","relu","prelu"
 dropout | real | yes | 0.5 | Dropout rate between layers ("mlp" only)
 
-TODO: see Caffe and templates section
+See the [Model Templates](#model_templates) section for more details.
 
 ## Get information on a service
 

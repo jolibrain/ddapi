@@ -454,6 +454,7 @@ scale | bool | yes | false | Whether to scale all values into [0,1]
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
+best | int | yes | 1 | Number of top predictions returned by data URI (supervised)
 template | string | yes | empty | Output template in Mustache format
 
 The variables that are usable in the output template format are those from the standard JSON output. See the [output template](#templates) dedicated section for more details and examples.

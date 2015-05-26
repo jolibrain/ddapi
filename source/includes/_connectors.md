@@ -65,6 +65,13 @@ shuffle | bool | yes | false | Whether to shuffle the training set (prior to spl
 
 ## Output connectors
 
-TODO: supervised output
+The output connector is at this stage very simple, and dedicated to supervised machine learning output.
 
-TODO: output templates and variables
+Its two main features are the control of the number of predictions per URI, and the output templating, which allows for custom output and seamless integration in external applications.
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+best | int | yes | 1 | Number of top predictions returned by data URI (supervised)
+template | string | yes | empty | Output template in Mustache format
+
+The variables that are usable in the output template format are those from the standard JSON output. See the [output template](#templates) dedicated section for more details and examples.

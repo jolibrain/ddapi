@@ -10,6 +10,7 @@ toc_footers:
 
 includes:
   - connectors
+  - templates
   - errors
 
 search: true
@@ -143,7 +144,7 @@ width | int | yes | 227 | Resize images to width ("image" only)
 height | int | yes | 227 | Resize images to height ("image" only)
 bw | bool | yes | false | Treat images as black & white
 
-See the section on [Connectors](/#connectors) for more details.
+See the section on [Connectors](#connectors) for more details.
 
 - Output object
 
@@ -453,9 +454,9 @@ scale | bool | yes | false | Whether to scale all values into [0,1]
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-template | string | yes | empty | Output template
+template | string | yes | empty | Output template in Mustache format
 
-TODO: see output template variables
+The variables that are usable in the output template format are those from the standard JSON output. See the [output template](#templates) dedicated section for more details and examples.
 
 #### Machine learning libraries
 

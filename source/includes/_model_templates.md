@@ -24,10 +24,10 @@ Model ID | Type | Input | Description
 -------- | ---- | ----- | -----------
 lregression | linear | CSV | logistic regression
 mlp | neural net | CSV | multilayer perceptron, fully configurable from API, see parameters below
-alexnet | deep neural net | Images | 'AlexNet', convolutional deep neural net, good accuracy, fast
-cifar | deep neural net | Images | Convolutional deep neural net, very good for small images
-nin | deep neural net | Images | 'Network in Network' convolutional deep neural net, good accuracy, very fast
-googlenet | deep neural net | Images | 'GoogleNet', convolutional deep neural net, best accuracy
+alexnet | deep neural net | Images 227x227 | 'AlexNet', convolutional deep neural net, good accuracy, fast
+cifar | deep neural net | Images 32x32 | Convolutional deep neural net, very good for small images
+nin | deep neural net | Images 224x224 | 'Network in Network' convolutional deep neural net, good accuracy, very fast
+googlenet | deep neural net | Images 224x224 | 'GoogleNet', convolutional deep neural net, best accuracy
 
 ## Parameters
 

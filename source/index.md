@@ -334,7 +334,7 @@ snapshot_prefix | string | yes | empty | Prefix to snapshot file, supports repos
 solver_type | string | yes | SGD | from "SGD", "ADAGRAD" and "NESTEROV"
 test_interval | int | yes | N/A | Number of iterations between testing phases
 test_initialization | bool | false | N/A | Whether to start training by testing the network
-lr_policy | string | yes | N/A | learning rate policy ("steps", "inv", "fixed", ...)
+lr_policy | string | yes | N/A | learning rate policy ("step", "inv", "fixed", ...)
 base_lr | real | yes | N/A | Initial learning rate
 gamma | real | yes | N/A | Learning rate drop factor
 stepsize | int | yes | N/A | Number of iterations between the dropping of the learning rate

@@ -327,7 +327,7 @@ label_offset | int | yes | 0 | Negative offset (e.g. -1) s othat labels range fr
 separator | string | yes | ',' | Column separator character
 id | string | yes | empty | Column name of the training examples identifier field, if any
 scale | bool | yes | false | Whether to scale all values into [0,1]
-min_vals,max_vals | array | yes | Instead of `scale`, provide the scaling parameters, as returned from a training call
+min_vals,max_vals | array | yes | empty| Instead of `scale`, provide the scaling parameters, as returned from a training call
 categoricals | array | yes | empty | List of categorical variables
 categoricals_mapping | object | yes | empty | Categorical mappings, as returned from a training call
 test_split | real | yes | 0 | Test split part of the dataset
@@ -476,7 +476,7 @@ ignore | array of string | yes | empty | Array of column names to ignore
 separator | string | yes | ',' | Column separator character
 id | string | yes | empty | Column name of the training examples identifier field, if any
 scale | bool | yes | false | Whether to scale all values into [0,1]
-min_vals,max_vals | array | yes | Instead of `scale`, provide the scaling parameters, as returned from a training call
+min_vals,max_vals | array | yes | empty | Instead of `scale`, provide the scaling parameters, as returned from a training call
 categoricals_mapping | object | yes | empty | Categorical mappings, as returned from a training call
 
 #### Output

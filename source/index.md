@@ -141,9 +141,26 @@ templates | string | yes | templates | Repository for model templates
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 connector | string | No | N/A | Either "image" or "csv", defines the input data format
+
+Image
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
 width | int | yes | 227 | Resize images to width ("image" only)
 height | int | yes | 227 | Resize images to height ("image" only)
 bw | bool | yes | false | Treat images as black & white
+
+CSV
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+label | string | no | N/A | Label column name
+ignore | array of string | yes | empty | Array of column names to ignore
+label_offset | int | yes | 0 | Negative offset (e.g. -1) s othat labels range from 0 onward
+separator | string | yes | ',' | Column separator character
+id | string | yes | empty | Column name of the training examples identifier field, if any
+scale | bool | yes | false | Whether to scale all values into [0,1]
+categoricals | array | yes | empty | List of categorical variables
 
 See the section on [Connectors](#connectors) for more details.
 
@@ -310,6 +327,7 @@ label_offset | int | yes | 0 | Negative offset (e.g. -1) s othat labels range fr
 separator | string | yes | ',' | Column separator character
 id | string | yes | empty | Column name of the training examples identifier field, if any
 scale | bool | yes | false | Whether to scale all values into [0,1]
+categoricals | array | yes | empty | List of categorical variables
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 
@@ -456,6 +474,8 @@ ignore | array of string | yes | empty | Array of column names to ignore
 separator | string | yes | ',' | Column separator character
 id | string | yes | empty | Column name of the training examples identifier field, if any
 scale | bool | yes | false | Whether to scale all values into [0,1]
+min_vals,max_vals | array | yes | Instead of `scale`, provide the scaling parameters, as returned from a training call
+categorical_mappings | object | yes | empty | Categorical mappings, as returned from a training call
 
 #### Output
 

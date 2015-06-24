@@ -78,4 +78,4 @@ best | int | yes | 1 | Number of top predictions returned by data URI (supervise
 measure | array | yes | empty | Output measures requested, from `acc`: accuracy, `f1`: f1, precision and recall, `mcll`: multi-class log loss, `auc`: area under the curve
 template | string | yes | empty | Output template in Mustache format
 
-The variables that are usable in the output template format are those from the standard JSON output. See the [output template](#templates) dedicated section for more details and examples.
+The variables that are usable in the output template format are those from the standard JSON output. See the [output template](#output-templates) dedicated section for more details and examples.

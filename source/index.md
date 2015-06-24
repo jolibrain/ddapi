@@ -333,6 +333,13 @@ categoricals_mapping | object | yes | empty | Categorical mappings, as returned 
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 
+#### Output connector
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+best | int | yes | 1 | Number of top predictions returned by data URI (supervised)
+measure | array | yes | empty | Output measures requested, from 'acc': accuracy, 'f1': f1, precision and recall, 'mcll': multi-class log loss, 'auc': area under the curve
+
 #### Machine learning libraries
 
 - Caffe

@@ -161,6 +161,7 @@ separator | string | yes | ',' | Column separator character
 id | string | yes | empty | Column name of the training examples identifier field, if any
 scale | bool | yes | false | Whether to scale all values into [0,1]
 categoricals | array | yes | empty | List of categorical variables
+db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows treatment in constant-size memory
 
 See the section on [Connectors](#connectors) for more details.
 
@@ -330,6 +331,7 @@ scale | bool | yes | false | Whether to scale all values into [0,1]
 min_vals,max_vals | array | yes | empty| Instead of `scale`, provide the scaling parameters, as returned from a training call
 categoricals | array | yes | empty | List of categorical variables
 categoricals_mapping | object | yes | empty | Categorical mappings, as returned from a training call
+db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows treatment in constant-size memory
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 

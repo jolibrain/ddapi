@@ -40,3 +40,4 @@ template | string | yes | empty | Neural network template, from "lregression", "
 layers | array of int | yes | [50] | Number of neurons per layer ("mlp" only)
 activation | string | yes | relu | Unit activation ("mlp" only), from "sigmoid","tanh","relu","prelu"
 dropout | real | yes | 0.5 | Dropout rate between layers ("mlp" only)
+regression | bool | yes | false | Whether the model is a regressor ("mlp" only)

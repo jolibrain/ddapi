@@ -361,7 +361,7 @@ Parameter | Type | Optional | Default | Description
 iterations | int | yes | N/A | Max number of solver's iterations
 snapshot | int | yes | N/A | Iterations between model snapshots
 snapshot_prefix | string | yes | empty | Prefix to snapshot file, supports repository
-solver_type | string | yes | SGD | from "SGD", "ADAGRAD" and "NESTEROV"
+solver_type | string | yes | SGD | from "SGD", "ADAGRAD", "NESTEROV", "RMSPROP", "ADADELTA" and "ADAM"
 test_interval | int | yes | N/A | Number of iterations between testing phases
 test_initialization | bool | false | N/A | Whether to start training by testing the network
 lr_policy | string | yes | N/A | learning rate policy ("step", "inv", "fixed", ...)

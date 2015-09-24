@@ -3,6 +3,7 @@ title: API Reference
 
 language_tabs:
   - shell
+  - python
 
 toc_footers:
   - <a href='#'>http://www.deepdetect.com/</a>
@@ -58,11 +59,10 @@ Each of the resources are detailed below, along with their options and examples 
 
 ```shell
 curl -X GET "http://localhost:8080/info"
-```
+
 
 > The above command returns JSON of the form:
 
-```json
 {
 	"status":{
 		"code":200,
@@ -77,6 +77,20 @@ curl -X GET "http://localhost:8080/info"
 		"services":[]
 		}
 }
+```
+
+```python
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+dd.info()
+
+> Result is a dict:
+
+{u'status': {u'msg': u'OK', u'code': 200}, u'head': {u'services': [], u'commit': u'34b9db3dad8c91b165dbcd22d6116fdfe4d78761', u'version': u'0.1', u'method': u'/info', u'branch': u'master'}}
+
 ```
 
 Returns general information about the deepdetect server, including the list of existing services.
@@ -98,13 +112,34 @@ Create, get information and delete machine learning services
 > Create a service from a multilayer Neural Network template, taking input from a CSV for prediction over 9 classes with 3 layers.
 
 ``` shell
-curl -X PUT "http://localhost:8080/services/myserv" -d "{\"mllib\":\"caffe\",\"description\":\"example classification service\",\"type\":\"supervised\",\"parameters\":{\"input\":{\"connector\":\"csv\"},\"mllib\":{\"template\":\"mlp\",\"nclasses\":9,\"layers\":[512,512,512],\"activation\":\"PReLU\"}},\"model\":{\"repository\":\"/home/me/models/example\"}}"
-```
+curl -X PUT "http://localhost:8080/services/myserv" -d "{\"mllib\":\"caffe\",\"description\":\"example classification service\",\"type\":\"supervised\",\"parameters\":{\"input\":{\"connector\":\"csv\"},\"mllib\":{\"template\":\"mlp\",\"nclasses\":9,\"layers\":[512,512,512],\"activation\":\"prelu\"}},\"model\":{\"repository\":\"/home/me/models/example\"}}"
 
-> If "/home/me/models/example" correctly exists, the output is
+# If "/home/me/models/example" correctly exists, the output is
 
-```json
 {"status":{"code":201,"msg":"Created"}}
+```
+```python
+
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+description = 'example classification service'
+
+layers = [512,512,512]
+mllib = 'caffe'
+model = {'templates':'../templates/caffe/','repository':'home/me/models/example'}
+parameters_input = {'connector':'csv'}
+parameters_mllib = {'template':'mlp','nclasses':9,'layers':layers,'activation':'prelu'}
+parameters_output = {}
+dd.put_service('myserv',model,description,mllib,
+               parameters_input,parameters_mllib,parameters_output)
+
+> returns:
+
+{u'status': {u'msg': u'Created', u'code': 201}}
+
 ```
 
 Creates a new machine learning service on the server.
@@ -186,11 +221,9 @@ See the [Model Templates](#model_templates) section for more details.
 
 ```shell
 curl -X GET "http://localhost:8080/services/myserv"
-```
 
 > Assuming the service 'myserv' was previously created, yields
 
-```json
 {
   "status":{
 	     "code":200,
@@ -208,6 +241,19 @@ curl -X GET "http://localhost:8080/services/myserv"
 	 }
 }
 ```
+```python
+
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+dd.get_service('myserv')
+
+> returns:
+
+{u'status': {u'msg': u'OK', u'code': 200}, u'body': {u'jobs': {}, u'mllib': u'caffe', u'name': u'myserv', u'description': u'example classification service'}}
+```
 
 Returns information on an existing service
 
@@ -223,12 +269,21 @@ None
 
 ```shell
 curl -X DELETE "http://localhost:8080/services/myserv?clear=full"
-```
 
 > Yields
 
-```json
 {"status":{"code":200,"msg":"OK"}}
+
+```
+
+```python
+
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+dd.delete_service('myserv',clear='full')
 
 ```
 
@@ -266,10 +321,23 @@ The current integration of the Caffe back-end for deep learning does not allow m
 
 ```shell
 curl -X POST "http://127.0.0.1:8080/train" -d "{\"service\":\"myserv\",\"async\":false,\"parameters\":{\"mllib\":{\"gpu\":true,\"solver\":{\"iterations\":300,\"test_interval\":100},\"net\":{\"batch_size\":5000}},\"input\":{\"label\":\"target\",\"id\":\"id\",\"separator\":\",\",\"shuffle\":true,\"test_split\":0.15,\"scale\":true},\"output\":{\"measure\":[\"acc\",\"mcll\"]}},\"data\":[\"/home/me/example/train.csv\"]}"
-```
-```json
+
 {"status":{"code":201,"msg":"Created"},"body":{"measure":{"iteration":299.0,"train_loss":0.6463099718093872,"mcll":0.5919793284503224,"acc":0.7675070028011205}},"head":{"method":"/train","time":403.0}}
 
+```
+
+```python
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+parameters_input = {'label':'target','id':'id','separator':',','shuffle':True,'test_split':0.5,'scale':True}
+parameters_mllib = {'gpu':True,'solver':{'iterations':300,'test_iterval':100},'net':{'batch_size':5000}}
+parameters_output = {'measure':['acc','mcll']}
+train_data = ['/home/me/example/train.csv/']
+
+dd.post_train('myserv',train_data,parameters_input,parameters_mllib,parameters_output,async=False)
 ```
 
 > Asynchronous train call from CSV dataset
@@ -277,18 +345,39 @@ curl -X POST "http://127.0.0.1:8080/train" -d "{\"service\":\"myserv\",\"async\"
 
 ```shell
 curl -X POST "http://127.0.0.1:8080/train" -d "{\"service\":\"myserv\",\"async\":true,\"parameters\":{\"mllib\":{\"gpu\":true,\"solver\":{\"iterations\":100000,\"test_interval\":1000},\"net\":{\"batch_size\":512}},\"input\":{\"label\":\"target\",\"id\":\"id\",\"separator\":\",\",\"shuffle\":true,\"test_split\":0.15,\"scale\":true},\"output\":{\"measure\":[\"acc\",\"mcll\"]}},\"data\":[\"/home/me/models/example/train.csv\"]}"
-```
-```json
+
 {"status":{"code":201,"msg":"Created"},"head":{"method":"/train","job":1,"status":"running"}}
+```
+
+```python
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+parameters_input = {'label':'target','id':'id','separator':',','shuffle':True,'test_split':0.5,'scale':True}
+parameters_mllib = {'gpu':True,'solver':{'iterations':300,'test_iterval':100},'net':{'batch_size':5000}}
+parameters_output = {'measure':['acc','mcll']}
+train_data = ['/home/me/example/train.csv/']
+
+dd.post_train('myserv',train_data,parameters_input,parameters_mllib,parameters_output,async=True)
+
 ```
 
 > Requesting the status of an asynchronous training job:
 
 ```shell
 curl -X GET "http://localhost:8080/train?service=myserv&job=1"
-```
-```json
+
 {"status":{"code":200,"msg":"OK"},"head":{"method":"/train","job":1,"status":"running","time":74.0},"body":{"measure":{"iteration":445.0,"train_loss":0.7159726023674011,"mcll":2.1306082640485237,"acc":0.16127989657401424}}}
+```
+```python
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+dd.get_train('myserv',job=1)
 ```
 
 Launches a blocking or asynchronous training job from a service
@@ -385,9 +474,16 @@ batch_size | int | yes | N/A | Training batch size
 
 ```shell
 curl -X GET "http://localhost:8080/train?service=myserv&job=1"
-```
-```json
+
 {"status":{"code":200,"msg":"OK"},"head":{"method":"/train","job":1,"status":"running","time":74.0},"body":{"measure":{"iteration":445.0,"train_loss":0.7159726023674011,"mcll":2.1306082640485237,"acc":0.16127989657401424}}}
+```
+```python
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+dd.get_train('myserv',job=1)
 ```
 
 Returns information on a training job running asynchronously
@@ -409,9 +505,16 @@ parameters.output.measure_hist | bool | yes | false | whether to return the full
 
 ```shell
 curl -X DELETE "http://localhost:8080/train?service=myserv&job=1"
-```
-```json
+
 {"status":{"code":200,"msg":"OK"},"head":{"time":196.0,"status":"terminated","method":"/train","job":1}}
+```
+```python
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+dd.delete_train('myserv',job=1)
 ```
 
 Kills a training job running asynchronously
@@ -438,9 +541,21 @@ Makes predictions from data out of an existing statistical model
 
 ```shell
 curl -X POST "http://localhost:8080/predict" -d "{\"service\":\"imageserv\",\"parameters\":{\"input\":{\"width\":224,\"height\":224},\"output\":{\"best\":3}},\"data\":[\"http://i.ytimg.com/vi/0vxOhd4qlnA/maxresdefault.jpg\"]}"
-```
-```json
+
 {"status":{"code":200,"msg":"OK"},"head":{"method":"/predict","time":1591.0,"service":"imageserv"},"body":{"predictions":{"uri":"http://i.ytimg.com/vi/0vxOhd4qlnA/maxresdefault.jpg","loss":0.0,"classes":[{"prob":0.24278657138347627,"cat":"n03868863 oxygen mask"},{"prob":0.20703653991222382,"cat":"n03127747 crash helmet"},{"prob":0.07931024581193924,"cat":"n03379051 football helmet"}]}}}
+```
+```python
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+data = ['http://i.ytimg.com/vi/0vxOhd4qlnA/maxresdefault.jpg']
+parameters_input = {'width':224,'height':224}
+parameters_mllib = {'gpu':False}
+parameters_output = {'best':3}
+
+predict_output = dd.post_predict('myserv',data,parameters_input,parameters_mllib,parameters_output)
 ```
 
 > Prediction from CSV file:
@@ -448,9 +563,20 @@ curl -X POST "http://localhost:8080/predict" -d "{\"service\":\"imageserv\",\"pa
 ```shell
 curl -X POST "http://localhost:8080/predict" -d "{\"service\":\"covert\",\"parameters\":{\"input\":{\"id\":\"Id\",\"separator\":\",\",\"scale\":true}},\"data\":[\"models/covert/test10.csv\"]}"
 
-```
-```json
 {"status":{"code":200,"msg":"OK"},"head":{"method":"/predict","time":16.0,"service":"covert"},"body":{"predictions":[{"uri":"15121","loss":0.0,"classes":{"prob":0.9999997615814209,"cat":"6"}},{"uri":"15122","loss":0.0,"classes":{"prob":0.9962882995605469,"cat":"5"}},{"uri":"15130","loss":0.0,"classes":{"prob":0.9999340772628784,"cat":"1"}},{"uri":"15123","loss":0.0,"classes":{"prob":1.0,"cat":"3"}},{"uri":"15124","loss":0.0,"classes":{"prob":1.0,"cat":"3"}},{"uri":"15128","loss":0.0,"classes":{"prob":1.0,"cat":"1"}},{"uri":"15125","loss":0.0,"classes":{"prob":0.9999998807907105,"cat":"3"}},{"uri":"15126","loss":0.0,"classes":{"prob":0.7535045146942139,"cat":"3"}},{"uri":"15129","loss":0.0,"classes":{"prob":0.9999986886978149,"cat":"1"}},{"uri":"15127","loss":0.0,"classes":{"prob":1.0,"cat":"1"}}]}}
+```
+```python
+from dd_client import DD
+
+dd = DD('localhost')
+dd.set_return_format(dd.RETURN_PYTHON)
+
+data = ['models/covert/test10.csv']
+parameters_input = {'id':'id','separator':',',scale:True}
+parameters_mllib = {'gpu':True}
+parameters_output = {}
+
+predict_output = dd.post_predict('covert',data,parameters_input,parameters_mllib,parameters_output)
 ```
 
 Make predictions from data

@@ -68,6 +68,7 @@ test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 
 - Text
+
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 count | int | yes | true | whether to count words and report counters

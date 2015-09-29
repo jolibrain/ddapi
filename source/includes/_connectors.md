@@ -34,7 +34,8 @@ Connectors are defined at service creation but their options can be modified in 
 The `connector` field defines its type:
 
 * `image` instantiates the image input connector
-* `csv` instantiate the input connector for CSV files
+* `csv` instantiates the input connector for CSV files
+* `txt` instantiates the input connector for text files
 
 Input connectors work almost the same during both the training and prediction phases. But the training phase usually deals with large masses of data, and therefore the connectors above are optimized to automate some tasks, typically building and preprocessing the dataset at training time.
 
@@ -63,6 +64,16 @@ scale | bool | yes | false | Whether to scale all values into [0,1]
 min_vals,max_vals | array | yes | empty | Instead of `scale`, provide the scaling parameters, as returned from a training call
 categoricals | array | yes | empty | List of categorical variables
 categoricals_mapping | object | yes | empty | Categorical mappings, as returned from a training call
+test_split | real | yes | 0 | Test split part of the dataset
+shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
+
+- Text
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+count | int | yes | true | whether to count words and report counters
+min_count | int | yes | 5 | min word count occurences for a word to be taken into account
+min_word_length | int | yes | 5 | min word length for a word to be taken into account
+tfidf | bool | yes | false | whether to compute TF/IDF for every word
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 

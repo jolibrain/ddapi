@@ -211,7 +211,7 @@ gpu | bool | yes | false | Whether to use GPU
 gpuid | int | yes | 0 | GPU id
 template | string | yes | empty | Neural network template, from "lregression", "mlp", "convnet", "alexnet", "googlenet", "ninnet"
 layers | array of int | yes | [50] | Number of neurons per layer ("mlp" only)
-layers | array of string | yes | [1000] | Type of layer and number of neurons peer layer: XCRY for X successive convolutional layers of Y filters followed by a max pooling layer, an int as a string for specifying the final fully connected layers size, e.g. \["2CR32","2CR64","1000"\] ("convnet" only)
+layers | array of string | yes | [1000] | Type of layer and number of neurons peer layer: XCRY for X successive convolutional layers of Y filters and activation layers followed by a max pooling layer, an int as a string for specifying the final fully connected layers size, e.g. \["2CR32","2CR64","1000"\] ("convnet" only)
 activation | string | yes | relu | Unit activation ("mlp" only), from "sigmoid","tanh","relu","prelu"
 dropout | real | yes | 0.5 | Dropout rate between layers ("mlp" only)
 regression | bool | yes | false | Whether the network is a regressor ("mlp" only)

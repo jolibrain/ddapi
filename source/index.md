@@ -217,6 +217,7 @@ dropout | real | yes | 0.5 | Dropout rate between layers ("mlp" only)
 regression | bool | yes | false | Whether the network is a regressor ("mlp" only)
 rotate | bool | yes | false | Whether to apply random rotations to input images ("convnet" only)
 mirror | bool | yes | false | Whether to apply random mirroring of input images ("convnet" only)
+weights | string | yes | empty | Weights filename of a pre-trained network (e.g. for finetuning a net)
 
 See the [Model Templates](#model_templates) section for more details.
 

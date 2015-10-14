@@ -218,6 +218,7 @@ regression | bool | yes | false | Whether the network is a regressor ("mlp" only
 rotate | bool | yes | false | Whether to apply random rotations to input images ("convnet" only)
 mirror | bool | yes | false | Whether to apply random mirroring of input images ("convnet" only)
 weights | string | yes | empty | Weights filename of a pre-trained network (e.g. for finetuning a net)
+finetuning | bool | yes | false | Whether to prepare neural net template for finetuning (requires `weights`)
 
 See the [Model Templates](#model_templates) section for more details.
 

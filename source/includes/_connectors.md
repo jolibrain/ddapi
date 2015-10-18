@@ -50,6 +50,7 @@ height | int | yes | 227 | Resize images to height ("image" only)
 bw | bool | yes | false | Treat images as black & white
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
+seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 
 - CSV
 
@@ -66,6 +67,7 @@ categoricals | array | yes | empty | List of categorical variables
 categoricals_mapping | object | yes | empty | Categorical mappings, as returned from a training call
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
+seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 
 - Text
 
@@ -77,6 +79,7 @@ min_word_length | int | yes | 5 | min word length for a word to be taken into ac
 tfidf | bool | yes | false | whether to compute TF/IDF for every word
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
+seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 
 ## Output connectors
 

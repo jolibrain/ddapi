@@ -22,3 +22,4 @@ DeepDetect Error Code | Meaning
 1006 | Service Bad Request -- Any bad parameter request error from Machine Learning library
 1007 | Internal ML Library Error -- Internal Machine Learning library error
 1008 | Train Predict Conflict -- Algorithm does not support prediction while training
+1009 | Output Connector Network Error -- Output connector has failed to connect to external software via network

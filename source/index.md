@@ -640,6 +640,15 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 best | int | yes | 1 | Number of top predictions returned by data URI (supervised)
 template | string | yes | empty | Output template in Mustache format
+network | object | yes | empty | Output network parameters for pushing the output into another listening software
+
+- Network object
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+url | string | no | N/A | URL of the remote service to connect to (e.g http://localhost:9200)
+http_method | string | yes | POST | HTTP connecting method, from "POST", "PUT", etc...
+content_type | string | yes | Content-Type: application/json | Content type HTTP header string
 
 The variables that are usable in the output template format are those from the standard JSON output. See the [output template](#templates) dedicated section for more details and examples.
 

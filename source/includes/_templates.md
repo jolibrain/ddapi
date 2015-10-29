@@ -36,5 +36,14 @@ Instead of decoding the standard JSON output of the DeepDetect server, the API a
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 template | string | yes | empty | Output template in Mustache format
+network | object | yes | empty | Output network parameters for pushing the output into another listening software
+
+- Network object
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+url | string | no | N/A | URL of the remote service to connect to (e.g http://localhost:9200)
+http_method | string | yes | POST | HTTP connecting method, from "POST", "PUT", etc...
+content_type | string | yes | Content-Type: application/json | Content type HTTP header string
 
 Using Mustache, you can turn the JSON into anything, from XML to specialized formats, with application to indexing into search engines, post-processing, UI rendering, etc...

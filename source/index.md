@@ -461,6 +461,7 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 gpu | bool | yes | false | Whether to use GPU
 gpuid | int | yes | 0 | GPU id to use
+resume | bool | yes | false | Whether to resume training from .solverstate and .caffemodel files
 
 Solver:
 

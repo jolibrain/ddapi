@@ -206,7 +206,8 @@ See the section on [Connectors](#connectors) for more details.
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-nclasses | int | no | N/A | Number of output classes ("supervised" service type)
+nclasses | int | no (classification only) | N/A | Number of output classes ("supervised" service type)
+ntargets | int | no (regression only) | N/A | Number of regression targets
 gpu | bool | yes | false | Whether to use GPU
 gpuid | int | yes | 0 | GPU id
 template | string | yes | empty | Neural network template, from "lregression", "mlp", "convnet", "alexnet", "googlenet", "ninnet"

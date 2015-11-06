@@ -36,7 +36,8 @@ googlenet | deep neural net | Images 224x224 | 'GoogleNet', convolutional deep n
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-nclasses | int | no | N/A | Number of output classes ("supervised" service type)
+nclasses | int | no (classification only) | N/A | Number of output classes ("supervised" service type)
+ntargets | int | no (regression only) | N/A | Number of regression targets
 template | string | yes | empty | Neural network template, from "lregression", "mlp", "convnet", "alexnet", "googlenet", "nin"
 layers | array of int | yes | [50] | Number of neurons per layer ("mlp" only)
 layers | array of string | yes | [1000] | Type of layer and number of neurons peer layer: XCRY for X successive convolutional layers of Y filters with activation layers followed by a max pooling layer, an int as a string for specifying the final fully connected layers size, e.g. \["2CR32","2CR64","1000"\] ("convnet" only)

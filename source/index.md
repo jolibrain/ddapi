@@ -488,6 +488,7 @@ Net:
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 batch_size | int | yes | N/A | Training batch size
+test_batch_size | int | yes | N/A | Testing batch size
 
 ## Get information on a training job
 

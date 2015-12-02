@@ -32,7 +32,7 @@ The Open Source software provides a server, an API, and the underlying Machine L
 
 The software defines a very simple flow, from data to the statistical model and the final application. The main elements and vocabulary are in that order:
 
-* `data` or `dataset`: images or numerical data (text is forthcoming)
+* `data` or `dataset`: images, numerical data, or text
 * `input connector`: entry point for data into DeepDetect. Specialized versions handle different data types (e.g. images or CSV)
 * `model`: repository that holds all the files necessary for building and usage of a statistical model such as a neural net
 * `service`: the central holder of models and connectors, living in memory and servicing the machine learning capabilities through the API. While the `model` can be held permanently on disk, a `service` is spawn around it and destroyed at will

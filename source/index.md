@@ -441,6 +441,7 @@ count | int | yes | true | whether to count words and report counters
 min_count | int | yes | 5 | min word count occurences for a word to be taken into account
 min_word_length | int | yes | 5 | min word length for a word to be taken into account
 tfidf | bool | yes | false | whether to compute TF/IDF for every word
+sentences | bool | yes | false | whether to turn every line into a document (requires dataset as file with one sentence per line in every class repository) 
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)

@@ -68,6 +68,7 @@ categoricals_mapping | object | yes | empty | Categorical mappings, as returned 
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
+db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
 
 - Text
 
@@ -81,6 +82,7 @@ sentences | bool | yes | false | whether to turn every line into a document (req
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
+db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
 
 ## Output connectors
 

@@ -220,6 +220,7 @@ rotate | bool | yes | false | Whether to apply random rotations to input images 
 mirror | bool | yes | false | Whether to apply random mirroring of input images ("convnet" only)
 weights | string | yes | empty | Weights filename of a pre-trained network (e.g. for finetuning a net)
 finetuning | bool | yes | false | Whether to prepare neural net template for finetuning (requires `weights`)
+db | bool | yes | false | whether to set a database as input of neural net, useful for handling large datasets and training in constant-memory (requires "mlp" or "convnet")
 
 See the [Model Templates](#model_templates) section for more details.
 
@@ -428,7 +429,7 @@ scale | bool | yes | false | Whether to scale all values into [0,1]
 min_vals,max_vals | array | yes | empty| Instead of `scale`, provide the scaling parameters, as returned from a training call
 categoricals | array | yes | empty | List of categorical variables
 categoricals_mapping | object | yes | empty | Categorical mappings, as returned from a training call
-db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows treatment in constant-size memory
+db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
@@ -445,6 +446,7 @@ sentences | bool | yes | false | whether to turn every line into a document (req
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
+db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
 
 #### Output connector
 

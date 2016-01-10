@@ -483,6 +483,7 @@ gamma | real | yes | N/A | Learning rate drop factor
 stepsize | int | yes | N/A | Number of iterations between the dropping of the learning rate
 momentum | real | yes | N/A | Learning momentum
 power | real | yes | N/A | Power applicable to some learning rate policies
+iter_size | int | yes | 1 | Number of passes (iter_size * batch_size) at every iteration
 
 Note: most of the default values for the parameters above are to be found in the Caffe files describing a given neural network architecture, or within Caffe library, therefore regarded as N/A at DeepDetect level.
 

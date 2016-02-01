@@ -485,6 +485,7 @@ base_lr | real | yes | N/A | Initial learning rate
 gamma | real | yes | N/A | Learning rate drop factor
 stepsize | int | yes | N/A | Number of iterations between the dropping of the learning rate
 momentum | real | yes | N/A | Learning momentum
+weight_decay | real | yes | N/A | Weight decay
 power | real | yes | N/A | Power applicable to some learning rate policies
 iter_size | int | yes | 1 | Number of passes (iter_size * batch_size) at every iteration
 

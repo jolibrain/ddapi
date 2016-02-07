@@ -28,7 +28,12 @@ convnet | convolutional neural net | Images | convolutional neural net, with lay
 alexnet | deep neural net | Images 227x227 | 'AlexNet', convolutional deep neural net, good accuracy, fast
 cifar | deep neural net | Images 32x32 | Convolutional deep neural net, very good for small images
 nin | deep neural net | Images 224x224 | 'Network in Network' convolutional deep neural net, good accuracy, very fast
-googlenet | deep neural net | Images 224x224 | 'GoogleNet', convolutional deep neural net, best accuracy
+googlenet | deep neural net | Images 224x224 | 'GoogleNet', convolutional deep neural net, good accuracy
+resnet_18 | deep neural net | Image 224x224 | 'ResNet', 18-layers deep residual convolutional neural net, top accuracy
+resnet_32 | deep neural net | Image 224x224 | 'ResNet', 32-layers deep residual convolutional neural net, top accuracy
+resnet_50 | deep neural net | Image 224x224 | 'ResNet', 50-layers deep residual convolutional neural net, top accuracy
+resnet_101 | deep neural net | Image 224x224 | 'ResNet', 101-layers deep residual convolutional neural net, top accuracy
+resnet_152 | deep neural net | Image 224x224 | 'ResNet', 152-layers deep residual convolutional neural net, top accuracy
 
 ## Parameters
 

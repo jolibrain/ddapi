@@ -210,7 +210,7 @@ nclasses | int | no (classification only) | N/A | Number of output classes ("sup
 ntargets | int | no (regression only) | N/A | Number of regression targets
 gpu | bool | yes | false | Whether to use GPU
 gpuid | int | yes | 0 | GPU id
-template | string | yes | empty | Neural network template, from "lregression", "mlp", "convnet", "alexnet", "googlenet", "ninnet"
+template | string | yes | empty | Neural network template, from "lregression", "mlp", "convnet", "alexnet", "googlenet", "ninnet", "resnet_18", "resnet_32", "resnet_50", "resnet_101", "resnet_152"
 layers | array of int | yes | [50] | Number of neurons per layer ("mlp" only)
 layers | array of string | yes | [1000] | Type of layer and number of neurons peer layer: XCRY for X successive convolutional layers of Y filters and activation layers followed by a max pooling layer, an int as a string for specifying the final fully connected layers size, e.g. \["2CR32","2CR64","1000"\] ("convnet" only)
 activation | string | yes | relu | Unit activation ("mlp" and "convnet" only), from "sigmoid","tanh","relu","prelu"

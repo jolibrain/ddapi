@@ -155,7 +155,7 @@ Creates a new machine learning service on the server.
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 mllib | string | No | N/A  | Name of the Machine Learning library (e.g. 'caffe')
-type | string | No | "supervised" | ML type "supervised"
+type | string | No | "supervised" | Machine Learning service type: 'supervised' yields a series of metrics related to a supervised objective, or 'unsupervised', typically for state-space compression or accessing neural network's inner layers.
 description | string | yes | empty | Service description
 model | object | No | N/A | Information for the statistical model to be built and/or used by the service
 input | object | No | N/A | Input information for connecting to data
@@ -671,3 +671,4 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 gpu | bool | yes | false | Whether to use GPU
 gpuid | int | yes | 0 | GPU id to use
+extract_layer | string | yes | name of the neural net's inner layer to return as output. Requires the service to be declared as 'unsupervised'

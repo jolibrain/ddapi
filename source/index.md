@@ -445,6 +445,7 @@ tfidf | bool | yes | false | whether to compute TF/IDF for every word
 sentences | bool | yes | false | whether to turn every line into a document (requires dataset as file with one sentence per line in every class repository) 
 characters | bool | yes | false | character-level text processing, as opposed to word-based text processing
 sequence | int | yes | N/A | for character-level text processing, the fixed length of each sample of text
+read_forward | bool | yes | false | for character-level text processing, whether to read content from left to right
 alphabet | string | yes | abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]{} | for character-level text processing, the alphabet of recognized symbols
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)

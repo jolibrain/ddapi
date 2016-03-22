@@ -49,5 +49,6 @@ layers | array of string | yes | [1000] | Type of layer and number of neurons pe
 activation | string | yes | relu | Unit activation ("mlp" and "convnet" only), from "sigmoid","tanh","relu","prelu"
 dropout | real | yes | 0.5 | Dropout rate between layers ("mlp" and "convnet" only)
 regression | bool | yes | false | Whether the model is a regressor ("mlp" and "convnet" only)
-rotate | bool | yes | false | Whether to apply random rotations to input images ("convnet" only)
-mirror | bool | yes | false | Whether to apply random mirroring of input images ("convnet" only)
+crop_size | int | yes | N/A | Size of random image crops as input images
+rotate | bool | yes | false | Whether to apply random rotations to input images
+mirror | bool | yes | false | Whether to apply random mirroring of input images

@@ -633,7 +633,7 @@ Make predictions from data
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 service | string | no | N/A | name of the service to make predictions from
-data | array of strings | no | N/A | array of data URI over which to make predictions
+data | array of strings | no | N/A | array of data URI over which to make predictions, supports base64 for images
 
 #### Input Connectors
 

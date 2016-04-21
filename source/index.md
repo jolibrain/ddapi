@@ -232,6 +232,7 @@ db | bool | yes | false | whether to set a database as input of neural net, usef
 See the [Model Templates](#model_templates) section for more details.
 
 - XGBoost
+
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 nclasses | int | no (classification only) | N/A | Number of output classes ("supervised" service type)

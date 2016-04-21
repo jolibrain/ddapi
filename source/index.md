@@ -22,7 +22,7 @@ search: true
 
 Welcome to the DeepDetect API!
 
-DeepDetect is a Machine Learning server. At this stage, it provides a flexible API to train deep neural networks and use them where they are needed.
+DeepDetect is a Machine Learning server. At this stage, it provides a flexible API to train deep neural networks and gradient boosted trees, and use them where they are needed, in both development and production.
 
 ## Principles
 
@@ -36,6 +36,7 @@ The software defines a very simple flow, from data to the statistical model and 
 * `input connector`: entry point for data into DeepDetect. Specialized versions handle different data types (e.g. images or CSV)
 * `model`: repository that holds all the files necessary for building and usage of a statistical model such as a neural net
 * `service`: the central holder of models and connectors, living in memory and servicing the machine learning capabilities through the API. While the `model` can be held permanently on disk, a `service` is spawn around it and destroyed at will
+* `mllib`: the machine learning library used for operations, two are supported at the moment, Caffe and XGBoost, more are on the way
 * `training`: the computational phase that uses a dataset to build a statistical model with predictive abilities on statistically relevant data
 * `prediction`: the computational phase that uses a trained statistical model in order to make a guess about one or more samples of data
 * `output connector`: the DeepDetect output, that supports templates so that the output can be easily customized by the user in order to fit in the final application
@@ -118,6 +119,11 @@ curl -X PUT "http://localhost:8080/services/myserv" -d "{\"mllib\":\"caffe\",\"d
 
 {"status":{"code":201,"msg":"Created"}}
 ```
+
+``` shell
+curl -X PUT "http://localhost:8080/services/myserv" -d "{\"mllib\":\"xgboost\",\"description\":\"example classification service\",\"type\":\"supervised\",\"parameters\":{\"input\":{\"connector\":\"csv\"},\"mllib\":{\"nclasses\":9}},\"model\":{\"repository\":\"/home/me/models/example\"}}"
+```
+
 ```python
 
 from dd_client import DD
@@ -224,6 +230,13 @@ finetuning | bool | yes | false | Whether to prepare neural net template for fin
 db | bool | yes | false | whether to set a database as input of neural net, useful for handling large datasets and training in constant-memory (requires "mlp" or "convnet")
 
 See the [Model Templates](#model_templates) section for more details.
+
+- XGBoost
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+nclasses | int | no (classification only) | N/A | Number of output classes ("supervised" service type)
+ntargets | int | no (regression only) | N/A | Number of regression targets (only 1 supported by XGBoost)
+
 
 ## Get information on a service
 
@@ -353,6 +366,12 @@ dd.post_train('myserv',train_data,parameters_input,parameters_mllib,parameters_o
 
 ```shell
 curl -X POST "http://127.0.0.1:8080/train" -d "{\"service\":\"myserv\",\"async\":true,\"parameters\":{\"mllib\":{\"gpu\":true,\"solver\":{\"iterations\":100000,\"test_interval\":1000},\"net\":{\"batch_size\":512}},\"input\":{\"label\":\"target\",\"id\":\"id\",\"separator\":\",\",\"shuffle\":true,\"test_split\":0.15,\"scale\":true},\"output\":{\"measure\":[\"acc\",\"mcll\"]}},\"data\":[\"/home/me/models/example/train.csv\"]}"
+
+{"status":{"code":201,"msg":"Created"},"head":{"method":"/train","job":1,"status":"running"}}
+```
+
+```shell
+curl -X POST "http://127.0.0.1:8080/train" -d "{\"service\":\"myserv\",\"async\":true,\"parameters\":{\"mllib\":{\"objective\":\"multi:softprob\",\"booster_params\":{\"max_depth\":10}},\"input\":{\"label\":\"target\",\"id\":\"id\",\"separator\":\",\",\"shuffle\":true,\"test_split\":0.15,\"scale\":true},\"output\":{\"measure\":[\"acc\",\"mcll\"]}},\"data\":[\"/home/me/models/example/train.csv\"]}"
 
 {"status":{"code":201,"msg":"Created"},"head":{"method":"/train","job":1,"status":"running"}}
 ```
@@ -499,6 +518,40 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 batch_size | int | yes | N/A | Training batch size
 test_batch_size | int | yes | N/A | Testing batch size
+
+- XGBoost
+
+General:
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+objective | string | yes | multi:softprob | objective function, among multi:softprob, binary:logistic, reg:linear, reg:logistic
+booster | string | yes | gbtree | which booster to use, gbtree or gblinear
+num_feature | int | yes | set by xgbbost | maximum dimension of the feature
+eval_metric | string | yes | according to objective | evaluation metric internal to xgboost
+base_score | double | yes | 0.5 | initial prediction score, global bias
+seed | int | yes | 0 | random number seed
+iterations | int | no | N/A | number of boosting iterations
+test_interval | int | yes | 1 | number of iterations between each testing pass
+save_period | int | yes | 0 | number of iterations between model saving to disk
+
+Booster_params:
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+eta | double | yes | 0.3 | step size shrinkage
+gamma | double | yes | 0 | minimum loss reduction
+max_depth | int | yes | 6 | maximum depth of a tree
+min_child_weight | int | yes | 1 | minimum sum of instance weight
+max_delta_step | int | yes | 0 | maximum delta step
+subsample | double | yes | 1.0 | subsample ratio of traning instance
+colsample | double | yes | 1.0 | subsample ratio of columns when contructing each tree
+lambda | double | yes | 1.0 | L2 regularization term on weights
+alpha | double | yes | 0.0 | L1 regularization term on weights
+lambda_bias | double | yes | 0.0 | L2 regularization for linear booster
+tree_method | string | yes | auto | tree construction algorithm, from auto, exact, approx
+
+For more details on all XGBoost parameters see the dedicated page at https://xgboost.readthedocs.org/en/latest/parameter.html
 
 ## Get information on a training job
 
@@ -684,3 +737,7 @@ Parameter | Type | Optional | Default | Description
 gpu | bool | yes | false | Whether to use GPU
 gpuid | int | yes | 0 | GPU id to use
 extract_layer | string | yes | name of the neural net's inner layer to return as output. Requires the service to be declared as 'unsupervised'
+
+- XGBoost
+
+No parameter required.

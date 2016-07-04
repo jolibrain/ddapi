@@ -41,7 +41,7 @@ Input connectors work almost the same during both the training and prediction ph
 
 Below is a summary of input connectors options, though they are all already defined in each API resource and call documentation.
 
-- Image
+- Image (`image`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -52,7 +52,7 @@ test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 
-- CSV
+- CSV (`csv`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -70,7 +70,7 @@ shuffle | bool | yes | false | Whether to shuffle the training set (prior to spl
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
 
-- Text
+- Text (`txt`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -87,6 +87,11 @@ test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
+sparse | bool | yes | false | whether to use sparse features (and sparce computations with Caffe for huge memory savings, for xgboost use `svm` connector instead) 
+
+- SVM (`svm`)
+
+No parameters
 
 ## Output connectors
 

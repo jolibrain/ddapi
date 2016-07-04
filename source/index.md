@@ -183,7 +183,7 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 connector | string | No | N/A | Either "image" or "csv", defines the input data format
 
-Image
+Image (`image`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -191,7 +191,7 @@ width | int | yes | 227 | Resize images to width ("image" only)
 height | int | yes | 227 | Resize images to height ("image" only)
 bw | bool | yes | false | Treat images as black & white
 
-CSV
+CSV (`csv`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -203,6 +203,21 @@ id | string | yes | empty | Column name of the training examples identifier fiel
 scale | bool | yes | false | Whether to scale all values into [0,1]
 categoricals | array | yes | empty | List of categorical variables
 db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows treatment in constant-size memory
+
+Text (`txt`)
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+sentences | bool | yes | false | whether to turn every line into a document (requires dataset as file with one sentence per line in every class repository) 
+characters | bool | yes | false | character-level text processing, as opposed to word-based text processing
+sequence | int | yes | N/A | for character-level text processing, the fixed length of each sample of text
+read_forward | bool | yes | false | for character-level text processing, whether to read content from left to right
+alphabet | string | yes | abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]{} | for character-level text processing, the alphabet of recognized symbols
+sparse | bool | yes | false | whether to use sparse features (and sparce computations with Caffe for huge memory savings, for xgboost use `svm` connector instead) 
+
+SVM (`svm`)
+
+No parameters
 
 See the section on [Connectors](#connectors) for more details.
 
@@ -426,7 +441,7 @@ data | object | yes | empty | input dataset for training, in some cases can be h
 
 #### Input Connectors
 
-- Image
+- Image (`image`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -437,7 +452,7 @@ test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 
-- CSV
+- CSV (`csv`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -455,7 +470,7 @@ test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 
-- Text
+- Text (`txt`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -472,6 +487,11 @@ test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
+sparse | bool | yes | false | whether to use sparse features (and sparce computations with Caffe for huge memory savings, for xgboost use `svm` connector instead) 
+
+- SVM (`svm`)
+
+No parameters
 
 #### Output connector
 
@@ -691,7 +711,7 @@ data | array of strings | no | N/A | array of data URI over which to make predic
 
 #### Input Connectors
 
-- Image
+- Image (`image`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -699,7 +719,7 @@ width | int | yes | 227 | Resize images to width ("image" only)
 height | int | yes | 227 | Resize images to height ("image" only)
 bw | bool | yes | false | Treat images as black & white
 
-- CSV
+- CSV (`csv`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
@@ -709,6 +729,10 @@ id | string | yes | empty | Column name of the training examples identifier fiel
 scale | bool | yes | false | Whether to scale all values into [0,1]
 min_vals,max_vals | array | yes | empty | Instead of `scale`, provide the scaling parameters, as returned from a training call
 categoricals_mapping | object | yes | empty | Categorical mappings, as returned from a training call
+
+- SVM (`svm`)
+
+No parameters
 
 #### Output
 

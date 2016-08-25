@@ -521,7 +521,7 @@ snapshot | int | yes | N/A | Iterations between model snapshots
 snapshot_prefix | string | yes | empty | Prefix to snapshot file, supports repository
 solver_type | string | yes | SGD | from "SGD", "ADAGRAD", "NESTEROV", "RMSPROP", "ADADELTA" and "ADAM"
 test_interval | int | yes | N/A | Number of iterations between testing phases
-test_initialization | bool | false | N/A | Whether to start training by testing the network
+test_initialization | bool | true | N/A | Whether to start training by testing the network
 lr_policy | string | yes | N/A | learning rate policy ("step", "inv", "fixed", ...)
 base_lr | real | yes | N/A | Initial learning rate
 gamma | real | yes | N/A | Learning rate drop factor

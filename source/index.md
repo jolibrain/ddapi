@@ -711,6 +711,8 @@ data | array of strings | no | N/A | array of data URI over which to make predic
 
 #### Input Connectors
 
+Note: it is good practice to configure the `input` connector at service creation, and then leave it's parameters empty at `predict` time.
+
 - Image (`image`)
 
 Parameter | Type | Optional | Default | Description
@@ -729,6 +731,21 @@ id | string | yes | empty | Column name of the training examples identifier fiel
 scale | bool | yes | false | Whether to scale all values into [0,1]
 min_vals,max_vals | array | yes | empty | Instead of `scale`, provide the scaling parameters, as returned from a training call
 categoricals_mapping | object | yes | empty | Categorical mappings, as returned from a training call
+
+- Text (`txt`)
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+count | int | yes | true | whether to count words and report counters
+min_count | int | yes | 5 | min word count occurences for a word to be taken into account
+min_word_length | int | yes | 5 | min word length for a word to be taken into account
+tfidf | bool | yes | false | whether to compute TF/IDF for every word
+sentences | bool | yes | false | whether to turn every line into a document (requires dataset as file with one sentence per line in every class repository) 
+characters | bool | yes | false | character-level text processing, as opposed to word-based text processing
+sequence | int | yes | N/A | for character-level text processing, the fixed length of each sample of text
+read_forward | bool | yes | false | for character-level text processing, whether to read content from left to right
+alphabet | string | yes | abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]{} | for character-level text processing, the alphabet of recognized symbols
+sparse | bool | yes | false | whether to use sparse features (and sparce computations with Caffe for huge memory savings, for xgboost use `svm` connector instead) 
 
 - SVM (`svm`)
 

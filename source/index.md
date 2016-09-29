@@ -780,6 +780,12 @@ gpu | bool | yes | false | Whether to use GPU
 gpuid | int | yes | 0 | GPU id to use
 extract_layer | string | yes | name of the neural net's inner layer to return as output. Requires the service to be declared as 'unsupervised'
 
+Net:
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+test_batch_size | int | yes | N/A | Prediction batch size (the server iterates as many batches as necessary to predict over all posted data)
+
 - XGBoost
 
 No parameter required.

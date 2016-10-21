@@ -230,7 +230,7 @@ Parameter | Type | Optional | Default | Description
 nclasses | int | no (classification only) | N/A | Number of output classes ("supervised" service type)
 ntargets | int | no (regression only) | N/A | Number of regression targets
 gpu | bool | yes | false | Whether to use GPU
-gpuid | int | yes | 0 | GPU id
+gpuid | int or array | yes | 0 | GPU id, use single int for single GPU, `-1` for using all GPUs, and array e.g. `[1,3]` for selecting among multiple GPUs
 template | string | yes | empty | Neural network template, from "lregression", "mlp", "convnet", "alexnet", "googlenet", "ninnet", "resnet_18", "resnet_32", "resnet_50", "resnet_101", "resnet_152"
 layers | array of int | yes | [50] | Number of neurons per layer ("mlp" only)
 layers | array of string | yes | [1000] | Type of layer and number of neurons peer layer: XCRY for X successive convolutional layers of Y filters and activation layers followed by a max pooling layer, an int as a string for specifying the final fully connected layers size, e.g. \["2CR32","2CR64","1000"\] ("convnet" only)
@@ -509,7 +509,7 @@ General:
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 gpu | bool | yes | false | Whether to use GPU
-gpuid | int | yes | 0 | GPU id to use
+gpuid | int or array | yes | 0 | GPU id, use single int for single GPU, `-1` for using all GPUs, and array e.g. `[1,3]` for selecting among multiple GPUs
 resume | bool | yes | false | Whether to resume training from .solverstate and .caffemodel files
 
 Solver:
@@ -777,7 +777,7 @@ The variables that are usable in the output template format are those from the s
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 gpu | bool | yes | false | Whether to use GPU
-gpuid | int | yes | 0 | GPU id to use
+gpuid | int or array | yes | 0 | GPU id, use single int for single GPU, `-1` for using all GPUs, and array e.g. `[1,3]` for selecting among multiple GPUs
 extract_layer | string | yes | name of the neural net's inner layer to return as output. Requires the service to be declared as 'unsupervised'
 
 Net:

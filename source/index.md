@@ -6,7 +6,7 @@ language_tabs:
   - python
 
 toc_footers:
-  - <a href='#'>http://www.deepdetect.com/</a>
+  - <a href='#'>https://www.deepdetect.com/</a>
   - <a href='http://github.com/beniz/deepdetect'>Documentation Powered by Slate</a>
 
 includes:
@@ -789,3 +789,7 @@ test_batch_size | int | yes | N/A | Prediction batch size (the server iterates a
 - XGBoost
 
 No parameter required.
+
+# Examples
+
+See the <a href="https://deepdetect.com/overview/examples/>Examples</a> page, and the <a href="https://deepdetect.com/overview/faq/>FAQ</a> for tips and tricks.

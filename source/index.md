@@ -14,6 +14,7 @@ includes:
   - templates
   - model_templates
   - errors
+  - examples
 
 search: true
 ---
@@ -790,6 +791,3 @@ test_batch_size | int | yes | N/A | Prediction batch size (the server iterates a
 
 No parameter required.
 
-# Examples
-
-See the <a href="https://deepdetect.com/overview/examples/">Examples</a> page, and the <a href="https://deepdetect.com/overview/faq/">FAQ</a> for tips and tricks.

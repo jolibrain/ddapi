@@ -512,6 +512,7 @@ Parameter | Type | Optional | Default | Description
 gpu | bool | yes | false | Whether to use GPU
 gpuid | int or array | yes | 0 | GPU id, use single int for single GPU, `-1` for using all GPUs, and array e.g. `[1,3]` for selecting among multiple GPUs
 resume | bool | yes | false | Whether to resume training from .solverstate and .caffemodel files
+class_weights | array of float | yes | 1.0 everywhere | Whether to weight some classes more / less than others, e.g. [1.0,0.1,1.0]
 
 Solver:
 

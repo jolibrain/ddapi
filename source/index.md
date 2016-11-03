@@ -37,7 +37,7 @@ The software defines a very simple flow, from data to the statistical model and 
 * `input connector`: entry point for data into DeepDetect. Specialized versions handle different data types (e.g. images or CSV)
 * `model`: repository that holds all the files necessary for building and usage of a statistical model such as a neural net
 * `service`: the central holder of models and connectors, living in memory and servicing the machine learning capabilities through the API. While the `model` can be held permanently on disk, a `service` is spawn around it and destroyed at will
-* `mllib`: the machine learning library used for operations, two are supported at the moment, Caffe and XGBoost, more are on the way
+* `mllib`: the machine learning library used for operations, two are supported at the moment, Caffe, XGBoost and Tensorflow, more are on the way
 * `training`: the computational phase that uses a dataset to build a statistical model with predictive abilities on statistically relevant data
 * `prediction`: the computational phase that uses a trained statistical model in order to make a guess about one or more samples of data
 * `output connector`: the DeepDetect output, that supports templates so that the output can be easily customized by the user in order to fit in the final application
@@ -161,8 +161,8 @@ Creates a new machine learning service on the server.
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-mllib | string | No | N/A  | Name of the Machine Learning library (e.g. 'caffe')
-type | string | No | "supervised" | Machine Learning service type: 'supervised' yields a series of metrics related to a supervised objective, or 'unsupervised', typically for state-space compression or accessing neural network's inner layers.
+mllib | string | No | N/A  | Name of the Machine Learning library, from `caffe`, `xgboost` and `tensorflow` 
+type | string | No | `supervised` | Machine Learning service type: `supervised` yields a series of metrics related to a supervised objective, or `unsupervised`, typically for state-space compression or accessing neural network's inner layers.
 description | string | yes | empty | Service description
 model | object | No | N/A | Information for the statistical model to be built and/or used by the service
 input | object | No | N/A | Input information for connecting to data
@@ -172,7 +172,7 @@ output | object | yes | empty | Output information
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-repository | string | No | N/A | Repository for the statistical model files
+repository | string | No | N/A | Repository for the statistical model files (Caffe only)
 templates | string | yes | templates | Repository for model templates
 
 
@@ -188,9 +188,9 @@ Image (`image`)
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-width | int | yes | 227 | Resize images to width ("image" only)
-height | int | yes | 227 | Resize images to height ("image" only)
-bw | bool | yes | false | Treat images as black & white
+width | int | yes | 227 | Resize images to width (`image` only)
+height | int | yes | 227 | Resize images to height (`image` only)
+bw | bool | yes | false | Treat images as black & white (Caffe only)
 
 CSV (`csv`)
 
@@ -228,22 +228,22 @@ See the section on [Connectors](#connectors) for more details.
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-nclasses | int | no (classification only) | N/A | Number of output classes ("supervised" service type)
+nclasses | int | no (classification only) | N/A | Number of output classes (`supervised` service type)
 ntargets | int | no (regression only) | N/A | Number of regression targets
 gpu | bool | yes | false | Whether to use GPU
 gpuid | int or array | yes | 0 | GPU id, use single int for single GPU, `-1` for using all GPUs, and array e.g. `[1,3]` for selecting among multiple GPUs
-template | string | yes | empty | Neural network template, from "lregression", "mlp", "convnet", "alexnet", "googlenet", "ninnet", "resnet_18", "resnet_32", "resnet_50", "resnet_101", "resnet_152"
-layers | array of int | yes | [50] | Number of neurons per layer ("mlp" only)
-layers | array of string | yes | [1000] | Type of layer and number of neurons peer layer: XCRY for X successive convolutional layers of Y filters and activation layers followed by a max pooling layer, an int as a string for specifying the final fully connected layers size, e.g. \["2CR32","2CR64","1000"\] ("convnet" only)
-activation | string | yes | relu | Unit activation ("mlp" and "convnet" only), from "sigmoid","tanh","relu","prelu"
-dropout | real | yes | 0.5 | Dropout rate between layers (templates, "mlp" and "convnet" only)
-regression | bool | yes | false | Whether the network is a regressor (templates, "mlp" and "convnet" only)
-crop_size | int | yes | N/A | Size of random image crops as input to the net (templates and "convnet" only)
-rotate | bool | yes | false | Whether to apply random rotations to input images (templates and "convnet" only)
-mirror | bool | yes | false | Whether to apply random mirroring of input images (templates and "convnet" only)
+template | string | yes | empty | Neural network template, from `lregression`, `mlp`, `convnet`, `alexnet`, `googlenet`, `nin`, `resnet_18`, `resnet_32`, `resnet_50`, `resnet_101`, `resnet_152`
+layers | array of int | yes | [50] | Number of neurons per layer (`mlp` only)
+layers | array of string | yes | [1000] | Type of layer and number of neurons peer layer: XCRY for X successive convolutional layers of Y filters and activation layers followed by a max pooling layer, an int as a string for specifying the final fully connected layers size, e.g. \["2CR32","2CR64","1000"\] (`convnet` only)
+activation | string | yes | relu | Unit activation (`mlp` and `convnet` only), from `sigmoid`,`tanh`,`relu`,`prelu`,`elu`
+dropout | real | yes | 0.5 | Dropout rate between layers (templates, `mlp` and `convnet` only)
+regression | bool | yes | false | Whether the network is a regressor (templates, `mlp` and `convnet` only)
+crop_size | int | yes | N/A | Size of random image crops as input to the net (templates and `convnet` only)
+rotate | bool | yes | false | Whether to apply random rotations to input images (templates and `convnet` only)
+mirror | bool | yes | false | Whether to apply random mirroring of input images (templates and `convnet` only)
 weights | string | yes | empty | Weights filename of a pre-trained network (e.g. for finetuning a net)
 finetuning | bool | yes | false | Whether to prepare neural net template for finetuning (requires `weights`)
-db | bool | yes | false | whether to set a database as input of neural net, useful for handling large datasets and training in constant-memory (requires "mlp" or "convnet")
+db | bool | yes | false | whether to set a database as input of neural net, useful for handling large datasets and training in constant-memory (requires `mlp` or `convnet`)
 
 See the [Model Templates](#model_templates) section for more details.
 
@@ -251,8 +251,16 @@ See the [Model Templates](#model_templates) section for more details.
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-nclasses | int | no (classification only) | N/A | Number of output classes ("supervised" service type)
+nclasses | int | no (classification only) | N/A | Number of output classes (`supervised` service type)
 ntargets | int | no (regression only) | N/A | Number of regression targets (only 1 supported by XGBoost)
+
+- Tensorflow
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+nclasses | int | no (classification only) | N/A | Number of output classes (`supervised` service type)
+inputlayer | string | yes | auto | network input layer name
+outputlayer | string | yes | auto | network output layer name
 
 
 ## Get information on a service
@@ -333,7 +341,7 @@ dd.delete_service('myserv',clear='full')
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-clear | string | yes | mem | "full", "lib" or "mem". "full" clears the model and service repository, "lib" removes model files only according to the behavior specified by the service's ML library, "mem' removes the service from memory without affecting the files
+clear | string | yes | mem | `full`, `lib` or `mem`. `full` clears the model and service repository, `lib` removes model files only according to the behavior specified by the service's ML library, `mem` removes the service from memory without affecting the files
 
 # Train
 
@@ -446,9 +454,9 @@ data | object | yes | empty | input dataset for training, in some cases can be h
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-width | int | yes | 227 | Resize images to width ("image" only)
-height | int | yes | 227 | Resize images to height ("image" only)
-bw | bool | yes | false | Treat images as black & white
+width | int | yes | 227 | Resize images to width (`image` only)
+height | int | yes | 227 | Resize images to height (`image` only)
+bw | bool | yes | false | Treat images as black & white (Caffe only)
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
@@ -574,6 +582,11 @@ lambda_bias | double | yes | 0.0 | L2 regularization for linear booster
 tree_method | string | yes | auto | tree construction algorithm, from auto, exact, approx
 
 For more details on all XGBoost parameters see the dedicated page at https://xgboost.readthedocs.org/en/latest/parameter.html
+
+- Tensorflow
+
+Not implemented, see Predict
+
 
 ## Get information on a training job
 
@@ -718,9 +731,9 @@ Note: it is good practice to configure the `input` connector at service creation
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-width | int | yes | 227 | Resize images to width ("image" only)
-height | int | yes | 227 | Resize images to height ("image" only)
-bw | bool | yes | false | Treat images as black & white
+width | int | yes | 227 | Resize images to width (`image` only)
+height | int | yes | 227 | Resize images to height (`image` only)
+bw | bool | yes | false | Treat images as black & white (Caffe only)
 
 - CSV (`csv`)
 
@@ -791,3 +804,11 @@ test_batch_size | int | yes | N/A | Prediction batch size (the server iterates a
 
 No parameter required.
 
+- Tensorflow
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+test_batch_size | int | yes | N/A | Prediction batch size (the server iterates as many batches as necessary to predict over all posted data)
+inputlayer | string | yes | auto | network input layer name
+outputlayer | string | yes | auto | network output layer name
+extract_layer | string | yes | name of the neural net's inner layer to return as output. Requires the service to be declared as 'unsupervised' (subsumes `outputlayer` in an `unsupervised` service)

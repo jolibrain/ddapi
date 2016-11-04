@@ -191,6 +191,8 @@ Parameter | Type | Optional | Default | Description
 width | int | yes | 227 | Resize images to width (`image` only)
 height | int | yes | 227 | Resize images to height (`image` only)
 bw | bool | yes | false | Treat images as black & white (Caffe only)
+mean | float | yes | 128 | mean pixel value to be subtracted to input image (`tensorflow` only)
+std | float | yes | 128 | standard pixel value deviation to be applied to input image (`tensorflow` only)
 
 CSV (`csv`)
 
@@ -734,6 +736,8 @@ Parameter | Type | Optional | Default | Description
 width | int | yes | 227 | Resize images to width (`image` only)
 height | int | yes | 227 | Resize images to height (`image` only)
 bw | bool | yes | false | Treat images as black & white (Caffe only)
+mean | float | yes | 128 | mean pixel value to be subtracted to input image (`tensorflow` only)
+std | float | yes | 128 | standard pixel value deviation to be applied to input image (`tensorflow` only)
 
 - CSV (`csv`)
 

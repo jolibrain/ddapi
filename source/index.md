@@ -591,6 +591,12 @@ For more details on all XGBoost parameters see the dedicated page at https://xgb
 
 Not implemented, see Predict
 
+- TSNE
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+perplexity | int | yes | 30 | perplexity is related to the number of nearest neighbors used to learn the manifold
+iterations | int | yes | 5000 | number of optimization iterations
+
 
 ## Get information on a training job
 

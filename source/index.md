@@ -553,6 +553,33 @@ Parameter | Type | Optional | Default | Description
 batch_size | int | yes | N/A | Training batch size
 test_batch_size | int | yes | N/A | Testing batch size
 
+Noise (images only):
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+prob | double | yes | 0.0 | Probability of each effect occurence
+decolorize | bool | yes | N/A | Whether to decolorize image
+hist_eq | bool | yes | N/A | Whether to equalize histogram
+inverse | bool | yes | N/A | Whether to inverse image
+gauss_blur | bool | yes | N/A | Whether to apply Gaussian blur
+posterize | bool | yes | N/A | Whether to posterize image
+erode | bool | yes | N/A | Whether to erode image
+saltpepper | bool | yes | N/A | Whether to apply salt & pepper effect to image
+clahe | bool | yes | N/A | Whether to apply CLAHE
+convert_to_hsv | bool | yes | N/A | Whether to convert to HSV
+convert_to_lab | bool | yes | N/A | Whether to convert to LAB
+
+Distort (images only):
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+prob | double | yes | 0.0 | Probability of each effect occurence
+brightness | bool | yes | N/A | Whether to distort image brightness
+contrast | bool | yes | N/A | Whether to distort image contrast
+saturation | bool | yes | N/A | Whether to distort image saturation
+HUE | bool | yes | N/A | Whether to distort image HUE
+random ordering | bool | yes | N/A | Whether to randomly reorder the image channels
+
 - XGBoost
 
 General:

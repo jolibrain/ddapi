@@ -611,14 +611,16 @@ lambda | double | yes | 1.0 | L2 regularization term on weights
 alpha | double | yes | 0.0 | L1 regularization term on weights
 lambda_bias | double | yes | 0.0 | L2 regularization for linear booster
 tree_method | string | yes | auto | tree construction algorithm, from auto, exact, approx
+scale_pos_weight | double |  yes | 1.0 | control the balance of positive and negative weights
 
-For more details on all XGBoost parameters see the dedicated page at https://xgboost.readthedocs.org/en/latest/parameter.html
+For more details on all XGBoost parameters see the dedicated page at https://github.com/dmlc/xgboost/blob/master/doc/parameter.md
 
 - Tensorflow
 
 Not implemented, see Predict
 
 - TSNE
+
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 perplexity | int | yes | 30 | perplexity is related to the number of nearest neighbors used to learn the manifold

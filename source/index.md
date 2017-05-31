@@ -256,6 +256,7 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 nclasses | int | no (classification only) | N/A | Number of output classes (`supervised` service type)
 ntargets | int | no (regression only) | N/A | Number of regression targets (only 1 supported by XGBoost)
+regression | bool | yes | false | Whether to train a regressor
 
 - Tensorflow
 
@@ -510,7 +511,7 @@ No parameters
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 best | int | yes | 1 | Number of top predictions returned by data URI (supervised)
-measure | array | yes | empty | Output measures requested, from `acc`: accuracy, `acc-k`: top-k accuracy, replace k with number (e.g. `acc-5`), `f1`: f1, precision and recall, `mcll`: multi-class log loss, `auc`: area under the curve, `cmdiag`: diagonal of confusion matrix (requires `f1`), `cmfull`: full confusion matrix (requires `f1`), `mcc`: Matthews correlation coefficient
+measure | array | yes | empty | Output measures requested, from `acc`: accuracy, `acc-k`: top-k accuracy, replace k with number (e.g. `acc-5`), `f1`: f1, precision and recall, `mcll`: multi-class log loss, `auc`: area under the curve, `cmdiag`: diagonal of confusion matrix (requires `f1`), `cmfull`: full confusion matrix (requires `f1`), `mcc`: Matthews correlation coefficient, `eucll`: euclidean distance (e.g. for regression tasks)
 
 #### Machine learning libraries
 

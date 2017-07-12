@@ -172,9 +172,9 @@ output | object | yes | empty | Output information
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-repository | string | No | N/A | Repository for the statistical model files (Caffe only)
+repository | string | No | N/A | Repository for the statistical model files
 templates | string | yes | templates | Repository for model templates
-
+weights | string | yes | empty | Weights filename of a pre-trained network (e.g. for finetuning or resuming a net)
 
 #### Connectors
 
@@ -244,7 +244,6 @@ regression | bool | yes | false | Whether the network is a regressor (templates,
 crop_size | int | yes | N/A | Size of random image crops as input to the net (templates and `convnet` only)
 rotate | bool | yes | false | Whether to apply random rotations to input images (templates and `convnet` only)
 mirror | bool | yes | false | Whether to apply random mirroring of input images (templates and `convnet` only)
-weights | string | yes | empty | Weights filename of a pre-trained network (e.g. for finetuning a net)
 finetuning | bool | yes | false | Whether to prepare neural net template for finetuning (requires `weights`)
 db | bool | yes | false | whether to set a database as input of neural net, useful for handling large datasets and training in constant-memory (requires `mlp` or `convnet`)
 

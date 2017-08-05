@@ -528,7 +528,8 @@ test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
-sparse | bool | yes | false | whether to use sparse features (and sparce computations with Caffe for huge memory savings, for xgboost use `svm` connector instead) 
+sparse | bool | yes | false | whether to use sparse features (and sparce computations with Caffe for huge memory savings, for xgboost use `svm` connector instead)
+embedding | bool | yes | false | whether to use an embedding as input to the network (replaces one-hot vectors with straight indices)
 
 - SVM (`svm`)
 

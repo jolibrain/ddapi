@@ -194,6 +194,7 @@ bw | bool | yes | false | Treat images as black & white (Caffe only)
 mean | float | yes | 128 | mean pixel value to be subtracted to input image (`tensorflow` only)
 mean | array of int | yes | N/A | mean pixel value per channel to be subtracted to input image (`caffe` only)
 std | float | yes | 128 | standard pixel value deviation to be applied to input image (`tensorflow` only)
+segmentation | bool | yes | false | whether to setup an image connector for a segmentation task
 
 CSV (`csv`)
 
@@ -492,6 +493,7 @@ bw | bool | yes | false | Treat images as black & white (Caffe only)
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
+segmentation | bool | yes | false | whether to setup an image connector for a segmentation task
 
 - CSV (`csv`)
 

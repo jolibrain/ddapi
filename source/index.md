@@ -824,6 +824,9 @@ measure | array | yes | empty | Output measures requested, from `acc`: accuracy,
 confidence_threshold | double | yes | 0.0 | only returns classifications or detections with probability strictly above threshold
 bbox |  bool | yes | false | returns bounding boxes around object when using an object detection model, such that (xmin,ymax) yields the top left corner and (xmax,ymin) the lower right corner of a box.
 roi | bool | yes | false | returns the bounding boxes and features (aka Regions of Interest) when using an object detection model with ROI pooling layer
+index | bool | yes | false | whether to index the output from prediction, for similarity search
+build_index | bool | yes | false | whether to build similarity index after prediction, no more indexing can be done afterward
+search | bool | yes | false | whether to use the predicted output for similarity search and return pre-indexed nearest neighbors
 
 - Network object
 

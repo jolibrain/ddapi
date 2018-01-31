@@ -827,6 +827,7 @@ roi | bool | yes | false | returns the bounding boxes and features (aka Regions 
 index | bool | yes | false | whether to index the output from prediction, for similarity search
 build_index | bool | yes | false | whether to build similarity index after prediction, no more indexing can be done afterward
 search | bool | yes | false | whether to use the predicted output for similarity search and return pre-indexed nearest neighbors
+ctc | bool | yes | false | whether the output is a sequence (using CTC encoding)
 
 - Network object
 

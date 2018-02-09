@@ -568,11 +568,13 @@ snapshot_prefix | string | yes | empty | Prefix to snapshot file, supports repos
 solver_type | string | yes | SGD | from "SGD", "ADAGRAD", "NESTEROV", "RMSPROP", "ADADELTA", "ADAM" and "AMSGRAD"
 test_interval | int | yes | N/A | Number of iterations between testing phases
 test_initialization | bool | true | N/A | Whether to start training by testing the network
-lr_policy | string | yes | N/A | learning rate policy ("step", "inv", "fixed", ...)
+lr_policy | string | yes | N/A | learning rate policy ("step", "inv", "fixed", "sgdr", ...)
 base_lr | real | yes | N/A | Initial learning rate
 gamma | real | yes | N/A | Learning rate drop factor
 stepsize | int | yes | N/A | Number of iterations between the dropping of the learning rate
 momentum | real | yes | N/A | Learning momentum
+period | int | yes | -1 | N/A | Period in number of iterations with SGDR, best to use ncycles instead
+ncycles | int | yes | 1 | Number of restart cycles with SGDR
 weight_decay | real | yes | N/A | Weight decay
 power | real | yes | N/A | Power applicable to some learning rate policies
 iter_size | int | yes | 1 | Number of passes (iter_size * batch_size) at every iteration

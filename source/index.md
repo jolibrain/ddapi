@@ -194,7 +194,9 @@ bw | bool | yes | false | Treat images as black & white (Caffe only)
 mean | float | yes | 128 | mean pixel value to be subtracted to input image (`tensorflow` only)
 mean | array of int | yes | N/A | mean pixel value per channel to be subtracted to input image (`caffe` only)
 std | float | yes | 128 | standard pixel value deviation to be applied to input image (`tensorflow` only)
-segmentation | bool | yes | false | whether to setup an image connector for a segmentation task
+segmentation | bool | yes | false | whether to setup an image connector for a segmentation task (`caffe` only)
+multi_label | bool | yes | false | whether to setup a multi label image task (`caffe` only)
+root_folder | string | yes | false | root folder for image data layer (i.e multi label image service for training with `caffe`)
 
 CSV (`csv`)
 

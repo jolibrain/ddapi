@@ -580,6 +580,7 @@ ncycles | int | yes | 1 | Number of restart cycles with SGDR
 weight_decay | real | yes | N/A | Weight decay
 power | real | yes | N/A | Power applicable to some learning rate policies
 iter_size | int | yes | 1 | Number of passes (iter_size * batch_size) at every iteration
+rand_skip | int | yes | 0 | Max number of images to skip when resuming training (only with segmentation or multilabel and Caffe backend)
 
 Note: most of the default values for the parameters above are to be found in the Caffe files describing a given neural network architecture, or within Caffe library, therefore regarded as N/A at DeepDetect level.
 

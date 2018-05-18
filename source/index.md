@@ -197,6 +197,7 @@ std | float | yes | 128 | standard pixel value deviation to be applied to input 
 segmentation | bool | yes | false | whether to setup an image connector for a segmentation task (`caffe` only)
 multi_label | bool | yes | false | whether to setup a multi label image task (`caffe` only)
 root_folder | string | yes | false | root folder for image data layer (i.e multi label image service for training with `caffe`)
+ctc | bool | yes | false | whether using a sequence target, required for OCR tasks
 
 CSV (`csv`)
 
@@ -558,7 +559,8 @@ gpu | bool | yes | false | Whether to use GPU
 gpuid | int or array | yes | 0 | GPU id, use single int for single GPU, `-1` for using all GPUs, and array e.g. `[1,3]` for selecting among multiple GPUs
 resume | bool | yes | false | Whether to resume training from .solverstate and .caffemodel files
 class_weights | array of float | yes | 1.0 everywhere | Whether to weight some classes more / less than others, e.g. [1.0,0.1,1.0]
-ignore_label | int | yes | N/A | a single label to be ignored by the loss (i.e. no gradients)
+ignore_label | int | yes | N/A | A single label to be ignored by the loss (i.e. no gradients)
+timesteps  int | yes | N/A | Number of timesteps for recurrence (`ctc` / OCR) models 
 
 Solver:
 

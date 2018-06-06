@@ -200,6 +200,7 @@ segmentation | bool | yes | false | whether to setup an image connector for a se
 multi_label | bool | yes | false | whether to setup a multi label image task (`caffe` only)
 root_folder | string | yes | false | root folder for image data layer (i.e multi label image service for training with `caffe`)
 ctc | bool | yes | false | whether using a sequence target, required for OCR tasks
+unchanged_data | bool | yes | false | do not allow data modification (e.g. interpolation upon resizing, ...). Useful for audio spectrogram as input images.
 
 CSV (`csv`)
 

@@ -789,6 +789,8 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 width | int | yes | 227 | Resize images to width (`image` only)
 height | int | yes | 227 | Resize images to height (`image` only)
+crop_width | int | yes | 0 | Center crop images to width (`image` only)
+crop_height | int | yes | 0 | Center crop images to height (`image` only)
 bw | bool | yes | false | Treat images as black & white (Caffe only)
 mean | float | yes | 128 | mean pixel value to be subtracted to input image (`tensorflow` only)
 mean | array of int | yes | N/A | mean pixel value per channel to be subtracted to input image (`caffe` only)

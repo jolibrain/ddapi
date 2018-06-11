@@ -37,7 +37,7 @@ The software defines a very simple flow, from data to the statistical model and 
 * `input connector`: entry point for data into DeepDetect. Specialized versions handle different data types (e.g. images or CSV)
 * `model`: repository that holds all the files necessary for building and usage of a statistical model such as a neural net
 * `service`: the central holder of models and connectors, living in memory and servicing the machine learning capabilities through the API. While the `model` can be held permanently on disk, a `service` is spawn around it and destroyed at will
-* `mllib`: the machine learning library used for operations, two are supported at the moment, Caffe, XGBoost and Tensorflow, more are on the way
+* `mllib`: the machine learning library used for operations, two are supported at the moment, Caffe, Caffe2, XGBoost and Tensorflow, more are on the way
 * `training`: the computational phase that uses a dataset to build a statistical model with predictive abilities on statistically relevant data
 * `prediction`: the computational phase that uses a trained statistical model in order to make a guess about one or more samples of data
 * `output connector`: the DeepDetect output, that supports templates so that the output can be easily customized by the user in order to fit in the final application
@@ -163,7 +163,7 @@ Creates a new machine learning service on the server.
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-mllib | string | No | N/A  | Name of the Machine Learning library, from `caffe`, `xgboost` and `tensorflow` 
+mllib | string | No | N/A  | Name of the Machine Learning library, from `caffe`, `caffe2`, `xgboost`, `tsne` and `tensorflow` 
 type | string | No | `supervised` | Machine Learning service type: `supervised` yields a series of metrics related to a supervised objective, or `unsupervised`, typically for state-space compression or accessing neural network's inner layers.
 description | string | yes | empty | Service description
 model | object | No | N/A | Information for the statistical model to be built and/or used by the service
@@ -852,7 +852,7 @@ The variables that are usable in the output template format are those from the s
 
 #### Machine learning libraries
 
-- Caffe
+- Caffe / Caffe2
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------

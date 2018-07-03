@@ -570,6 +570,7 @@ resume | bool | yes | false | Whether to resume training from .solverstate and .
 class_weights | array of float | yes | 1.0 everywhere | Whether to weight some classes more / less than others, e.g. [1.0,0.1,1.0]
 ignore_label | int | yes | N/A | A single label to be ignored by the loss (i.e. no gradients)
 timesteps  int | yes | N/A | Number of timesteps for recurrence (`ctc` / OCR) models 
+loss | string | yes | N/A | Special network losses, from `dice`, `dice_multiclass`, `dice_weighted`, useful for image segmentation
 
 Solver:
 

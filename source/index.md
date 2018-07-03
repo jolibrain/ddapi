@@ -302,6 +302,11 @@ nclasses | int | no (classification only) | N/A | Number of output classes (`sup
 inputlayer | string | yes | auto | network input layer name
 outputlayer | string | yes | auto | network output layer name
 
+- Output Object
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+store_config | bool | yes | false | stores the creation call in a `config.json` file in the model directory
 
 ## Get information on a service
 

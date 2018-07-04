@@ -201,6 +201,7 @@ multi_label | bool | yes | false | whether to setup a multi label image task (`c
 root_folder | string | yes | false | root folder for image data layer (i.e multi label image service for training with `caffe`)
 ctc | bool | yes | false | whether using a sequence target, required for OCR tasks
 unchanged_data | bool | yes | false | do not allow data modification (e.g. interpolation upon resizing, ...). Useful for audio spectrogram as input images.
+bbox | bool | yes | false | whether to setup an object detection model
 
 CSV (`csv`)
 
@@ -505,7 +506,8 @@ bw | bool | yes | false | Treat images as black & white (Caffe only)
 test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
-segmentation | bool | yes | false | whether to setup an image connector for a segmentation task
+segmentation | bool | yes | false | whether to setup an image connector for a segmentation training job
+bbox | bool | yes | false | whether to setup an image connector for an object detection training job
 
 - CSV (`csv`)
 

@@ -844,7 +844,7 @@ network | object | yes | empty | Output network parameters for pushing the outpu
 measure | array | yes | empty | Output measures requested, from `acc`: accuracy, `acc-k`: top-k accuracy, replace k with number (e.g. `acc-5`), `f1`: f1, precision and recall, `mcll`: multi-class log loss, `auc`: area under the curve, `cmdiag`: diagonal of confusion matrix (requires `f1`), `cmfull`: full confusion matrix (requires `f1`), `mcc`: Matthews correlation coefficient
 confidence_threshold | double | yes | 0.0 | only returns classifications or detections with probability strictly above threshold
 bbox |  bool | yes | false | returns bounding boxes around object when using an object detection model, such that (xmin,ymax) yields the top left corner and (xmax,ymin) the lower right corner of a box.
-roi | bool | yes | false | returns the bounding boxes and features (aka Regions of Interest) when using an object detection model with ROI pooling layer
+rois | bool | yes | false | returns the bounding boxes and features (aka Regions of Interest) when using an object detection model with ROI pooling layer
 index | bool | yes | false | whether to index the output from prediction, for similarity search
 build_index | bool | yes | false | whether to build similarity index after prediction, no more indexing can be done afterward
 search | bool | yes | false | whether to use the predicted output for similarity search and return pre-indexed nearest neighbors

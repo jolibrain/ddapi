@@ -177,6 +177,7 @@ Parameter | Type | Optional | Default | Description
 repository | string | No | N/A | Repository for the statistical model files
 templates | string | yes | templates | Repository for model templates
 weights | string | yes | empty | Weights filename of a pre-trained network (e.g. for finetuning or resuming a net)
+create_repository | bool | yes | false | Whether to create the model repository directory if it does not exist already
 
 #### Connectors
 

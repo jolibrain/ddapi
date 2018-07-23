@@ -203,6 +203,8 @@ root_folder | string | yes | false | root folder for image data layer (i.e multi
 ctc | bool | yes | false | whether using a sequence target, required for OCR tasks
 unchanged_data | bool | yes | false | do not allow data modification (e.g. interpolation upon resizing, ...). Useful for audio spectrogram as input images.
 bbox | bool | yes | false | whether to setup an object detection model
+db_width | int | yes | 0 | in database image width (object detection only)
+db_height | int | yes | 0 | in database image height (object detection only)
 
 CSV (`csv`)
 
@@ -558,6 +560,7 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 best | int | yes | 1 | Number of top predictions returned by data URI (supervised)
 measure | array | yes | empty | Output measures requested, from `acc`: accuracy, `acc-k`: top-k accuracy, replace k with number (e.g. `acc-5`), `f1`: f1, precision and recall, `mcll`: multi-class log loss, `auc`: area under the curve, `cmdiag`: diagonal of confusion matrix (requires `f1`), `cmfull`: full confusion matrix (requires `f1`), `mcc`: Matthews correlation coefficient, `eucll`: euclidean distance (e.g. for regression tasks), `kl`: KL_divergence, `js`: JS divergence, `was`: Wasserstein, `ks`: Kolmogorov Smirnov, `dc`: distance correlation, `r2`: R2, `deltas`: delta scores
+target_repository | string | yes | empty | target directory to which to copy the best model files once training has completed
 
 #### Machine learning libraries
 

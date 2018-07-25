@@ -203,8 +203,6 @@ root_folder | string | yes | false | root folder for image data layer (i.e multi
 ctc | bool | yes | false | whether using a sequence target, required for OCR tasks
 unchanged_data | bool | yes | false | do not allow data modification (e.g. interpolation upon resizing, ...). Useful for audio spectrogram as input images.
 bbox | bool | yes | false | whether to setup an object detection model
-db_width | int | yes | 0 | in database image width (object detection only)
-db_height | int | yes | 0 | in database image height (object detection only)
 
 CSV (`csv`)
 
@@ -511,6 +509,8 @@ shuffle | bool | yes | false | Whether to shuffle the training set (prior to spl
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 segmentation | bool | yes | false | whether to setup an image connector for a segmentation training job
 bbox | bool | yes | false | whether to setup an image connector for an object detection training job
+db_width | int | yes | 0 | in database image width (object detection only)
+db_height | int | yes | 0 | in database image height (object detection only)
 
 - CSV (`csv`)
 

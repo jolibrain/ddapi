@@ -511,6 +511,7 @@ segmentation | bool | yes | false | whether to setup an image connector for a se
 bbox | bool | yes | false | whether to setup an image connector for an object detection training job
 db_width | int | yes | 0 | in database image width (object detection only)
 db_height | int | yes | 0 | in database image height (object detection only)
+align | bool | yes | false | for ocr tasks only, align width on highest dimension
 
 - CSV (`csv`)
 

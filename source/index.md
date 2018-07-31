@@ -256,6 +256,7 @@ mirror | bool | yes | false | Whether to apply random mirroring of input images 
 finetuning | bool | yes | false | Whether to prepare neural net template for finetuning (requires `weights`)
 db | bool | yes | false | whether to set a database as input of neural net, useful for handling large datasets and training in constant-memory (requires `mlp` or `convnet`)
 scaling_temperature | real | yes | 1.0 | sets the softmax temperature of an existing network (e.g. useful for model calibration)
+loss | string | yes | N/A | Special network losses, from `dice`, `dice_multiclass`, `dice_weighted`, useful for image segmentation
 
 See the [Model Templates](#model_templates) section for more details.
 
@@ -577,7 +578,6 @@ resume | bool | yes | false | Whether to resume training from .solverstate and .
 class_weights | array of float | yes | 1.0 everywhere | Whether to weight some classes more / less than others, e.g. [1.0,0.1,1.0]
 ignore_label | int | yes | N/A | A single label to be ignored by the loss (i.e. no gradients)
 timesteps  int | yes | N/A | Number of timesteps for recurrence (`ctc` / OCR) models 
-loss | string | yes | N/A | Special network losses, from `dice`, `dice_multiclass`, `dice_weighted`, useful for image segmentation
 
 Solver:
 

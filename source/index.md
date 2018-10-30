@@ -178,6 +178,7 @@ repository | string | No | N/A | Repository for the statistical model files
 templates | string | yes | templates | Repository for model templates
 weights | string | yes | empty | Weights filename of a pre-trained network (e.g. for finetuning or resuming a net)
 create_repository | bool | yes | false | Whether to create the model repository directory if it does not exist already
+index_preload | bool | yes | true | Whether to preload a similarity search index, set to false for fast init
 
 #### Connectors
 
@@ -250,6 +251,7 @@ layers | array of string | yes | [1000] | Type of layer and number of neurons pe
 activation | string | yes | relu | Unit activation (`mlp` and `convnet` only), from `sigmoid`,`tanh`,`relu`,`prelu`,`elu`
 dropout | real | yes | 0.5 | Dropout rate between layers (templates, `mlp` and `convnet` only)
 regression | bool | yes | false | Whether the network is a regressor (templates, `mlp` and `convnet` only)
+autoencoder | bool | yes | false | Whether the network is an autoencoder (template `mlp` only)
 crop_size | int | yes | N/A | Size of random image crops as input to the net (templates and `convnet` only)
 rotate | bool | yes | false | Whether to apply random rotations to input images (templates and `convnet` only)
 mirror | bool | yes | false | Whether to apply random mirroring of input images (templates and `convnet` only)
@@ -288,6 +290,17 @@ contrast | bool | yes | N/A | Whether to distort image contrast
 saturation | bool | yes | N/A | Whether to distort image saturation
 HUE | bool | yes | N/A | Whether to distort image HUE
 random ordering | bool | yes | N/A | Whether to randomly reorder the image channels
+
+- Caffe2
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+nclasses | int | no (classification only) | N/A | Number of output classes (`supervised` service type)
+gpu | bool | yes | false | Whether to use GPU
+gpuid | int or array | yes | 0 | GPU id, use single int for single GPU, `-1` for using all GPUs, and array e.g. `[1,3]` for selecting among multiple GPUs
+template | string | yes | empty | Neural network template (from `lenet`, `alexnet`, `resnet_50`)
+mirror | bool | yes | false | Whether to apply random mirroring of input images (templates and `convnet` only)
+finetuning | bool | yes | false | Whether to prepare neural net template for finetuning (requires `weights`)
 
 - XGBoost
 
@@ -513,6 +526,8 @@ bbox | bool | yes | false | whether to setup an image connector for an object de
 db_width | int | yes | 0 | in database image width (object detection only)
 db_height | int | yes | 0 | in database image height (object detection only)
 align | bool | yes | false | for ocr tasks only, align width on highest dimension
+scale_min | int | yes | N/A | image auto min scaling
+scale_max | int | yes | N/A | image auto max scaling
 
 - CSV (`csv`)
 
@@ -602,6 +617,38 @@ iter_size | int | yes | 1 | Number of passes (iter_size * batch_size) at every i
 rand_skip | int | yes | 0 | Max number of images to skip when resuming training (only with segmentation or multilabel and Caffe backend)
 
 Note: most of the default values for the parameters above are to be found in the Caffe files describing a given neural network architecture, or within Caffe library, therefore regarded as N/A at DeepDetect level.
+
+Net:
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+batch_size | int | yes | N/A | Training batch size
+test_batch_size | int | yes | N/A | Testing batch size
+
+- Caffe2
+
+General:
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+gpu | bool | yes | false | Whether to use GPU
+gpuid | int or array | yes | 0 | GPU id, use single int for single GPU, `-1` for using all GPUs, and array e.g. `[1,3]` for selecting among multiple GPUs
+resume | bool | yes | false | Whether to resume training from .solverstate and .caffemodel files
+
+Solver:
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+iterations | int | yes | N/A | Max number of solver's iterations
+snapshot | int | yes | N/A | Iterations between model snapshots
+solver_type | string | yes | SGD | from "SGD", "ADAGRAD", "NESTEROV", "RMSPROP", "ADADELTA", "ADAM" and "AMSGRAD"
+test_interval | int | yes | N/A | Number of iterations between testing phases
+lr_policy | string | yes | N/A | learning rate policy ("step", "inv", "fixed", "sgdr", ...)
+base_lr | real | yes | N/A | Initial learning rate
+gamma | real | yes | N/A | Learning rate drop factor
+stepsize | int | yes | N/A | Number of iterations between the dropping of the learning rate
+momentum | real | yes | N/A | Learning momentum
+power | real | yes | N/A | Power applicable to some learning rate policies
 
 Net:
 

@@ -291,6 +291,20 @@ saturation | bool | yes | N/A | Whether to distort image saturation
 HUE | bool | yes | N/A | Whether to distort image HUE
 random ordering | bool | yes | N/A | Whether to randomly reorder the image channels
 
+Perspective (images only):
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+prob | double | yes | 0.0 | Probability of each effect occurence
+all_effects | bool | yes | false | Apply all effects below, randomly
+persp_horizontal | bool | yes | true | Whether to distort the perspective horizontally
+persp_vertical | bool | yes | true | Whether to distort the perspective vertically
+zoom_out | bool | yes | yes | true | distance change, look further away
+zoom_in | bool | yes | yes | true | distance changee, look from closer by
+zoom_factor | int | yes | 0.25 | 0.25 means that image can be *1.25 or /1.25
+persp_factor | int | yes | 0.25 | 0.25 means that new image corners  be in *1.25 or 0.75
+pad_mode  | string | yes | mirrored | filling around image, from `mirrored` / `constant` (black) / `repeat_nearest` 
+
 - Caffe2
 
 Parameter | Type | Optional | Default | Description

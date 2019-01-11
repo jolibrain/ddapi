@@ -301,8 +301,8 @@ persp_horizontal | bool | yes | true | Whether to distort the perspective horizo
 persp_vertical | bool | yes | true | Whether to distort the perspective vertically
 zoom_out | bool | yes | true | distance change, look further away
 zoom_in | bool | yes | true | distance changee, look from closer by
-zoom_factor | int | yes | 0.25 | 0.25 means that image can be *1.25 or /1.25
-persp_factor | int | yes | 0.25 | 0.25 means that new image corners  be in *1.25 or 0.75
+zoom_factor | float | yes | 0.25 | 0.25 means that image can be *1.25 or /1.25
+persp_factor | float | yes | 0.25 | 0.25 means that new image corners  be in *1.25 or 0.75
 pad_mode  | string | yes | mirrored | filling around image, from `mirrored` / `constant` (black) / `repeat_nearest` 
 
 - Caffe2

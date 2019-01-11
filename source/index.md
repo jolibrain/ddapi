@@ -291,7 +291,7 @@ saturation | bool | yes | N/A | Whether to distort image saturation
 HUE | bool | yes | N/A | Whether to distort image HUE
 random ordering | bool | yes | N/A | Whether to randomly reorder the image channels
 
-Perspective (images only):
+Geometry (images only):
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------

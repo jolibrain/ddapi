@@ -258,7 +258,7 @@ mirror | bool | yes | false | Whether to apply random mirroring of input images 
 finetuning | bool | yes | false | Whether to prepare neural net template for finetuning (requires `weights`)
 db | bool | yes | false | whether to set a database as input of neural net, useful for handling large datasets and training in constant-memory (requires `mlp` or `convnet`)
 scaling_temperature | real | yes | 1.0 | sets the softmax temperature of an existing network (e.g. useful for model calibration)
-loss | string | yes | N/A | Special network losses, from `dice`, `dice_multiclass`, `dice_weighted`, useful for image segmentation
+loss | string | yes | N/A | Special network losses, from `dice`, `dice_multiclass`, `dice_weighted`, `dice_weighted_batch` or `dice_weighted_all`, useful for image segmentation
 
 See the [Model Templates](#model_templates) section for more details.
 

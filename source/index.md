@@ -870,6 +870,7 @@ bw | bool | yes | false | Treat images as black & white (Caffe only)
 mean | float | yes | 128 | mean pixel value to be subtracted to input image (`tensorflow` only)
 mean | array of int | yes | N/A | mean pixel value per channel to be subtracted to input image (`caffe` only)
 std | float | yes | 128 | standard pixel value deviation to be applied to input image (`tensorflow` only)
+segmentation | yes | yes | false | whether a segmentation service
 
 - CSV (`csv`)
 
@@ -917,6 +918,7 @@ build_index | bool | yes | false | whether to build similarity index after predi
 search | bool | yes | false | whether to use the predicted output for similarity search and return pre-indexed nearest neighbors
 multibox_rois | bool | false | aggregates bounding boxes ROIs features (requires `rois`) for image similarity search
 ctc | bool | yes | false | whether the output is a sequence (using CTC encoding)
+confidences | array | yes | empty | Segmentation only: output confidence maps for "best" class, "all" classes, or classes being specified by number, e.g. "1","3".
 
 - Network object
 

@@ -34,10 +34,10 @@ The Open Source software provides a server, an API, and the underlying Machine L
 The software defines a very simple flow, from data to the statistical model and the final application. The main elements and vocabulary are in that order:
 
 * `data` or `dataset`: images, numerical data, or text
-* `input connector`: entry point for data into DeepDetect. Specialized versions handle different data types (e.g. images or CSV)
+* `input connector`: entry point for data into DeepDetect. Specialized versions handle different data types (e.g. images, text, CSV, ...)
 * `model`: repository that holds all the files necessary for building and usage of a statistical model such as a neural net
 * `service`: the central holder of models and connectors, living in memory and servicing the machine learning capabilities through the API. While the `model` can be held permanently on disk, a `service` is spawn around it and destroyed at will
-* `mllib`: the machine learning library used for operations, two are supported at the moment, Caffe, Caffe2, XGBoost and Tensorflow, more are on the way
+* `mllib`: the machine learning library used for operations, two are supported at the moment, Caffe, Caffe2, XGBoost, Dlib, NCNN and Tensorflow, more are on the way
 * `training`: the computational phase that uses a dataset to build a statistical model with predictive abilities on statistically relevant data
 * `prediction`: the computational phase that uses a trained statistical model in order to make a guess about one or more samples of data
 * `output connector`: the DeepDetect output, that supports templates so that the output can be easily customized by the user in order to fit in the final application
@@ -211,12 +211,24 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 label | string | no | N/A | Label column name
 ignore | array of string | yes | empty | Array of column names to ignore
-label_offset | int | yes | 0 | Negative offset (e.g. -1) s othat labels range from 0 onward
+label_offset | int | yes | 0 | Negative offset (e.g. -1) so that labels range from 0 onward
 separator | string | yes | ',' | Column separator character
 id | string | yes | empty | Column name of the training examples identifier field, if any
 scale | bool | yes | false | Whether to scale all values into [0,1]
 categoricals | array | yes | empty | List of categorical variables
 db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows treatment in constant-size memory
+
+CSV Time-series (`csvts`)
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+label | string | no | N/A | Label column name
+ignore | array of string | yes | empty | Array of column names to ignore
+separator | string | yes | ',' | Column separator character
+id | string | yes | empty | Column name of the training examples identifier field, if any
+scale | bool | yes | false | Whether to scale all values into [0,1]
+db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows treatment in constant-size memory
+
 
 Text (`txt`)
 
@@ -249,7 +261,7 @@ template | string | yes | empty | Neural network template, from `lregression`, `
 layers | array of int | yes | [50] | Number of neurons per layer (`mlp` only)
 layers | array of string | yes | [1000] | Type of layer and number of neurons peer layer: XCRY for X successive convolutional layers of Y filters and activation layers followed by a max pooling layer, an int as a string for specifying the final fully connected layers size, e.g. \["2CR32","2CR64","1000"\] (`convnet` only)
 activation | string | yes | relu | Unit activation (`mlp` and `convnet` only), from `sigmoid`,`tanh`,`relu`,`prelu`,`elu`
-dropout | real | yes | 0.5 | Dropout rate between layers (templates, `mlp` and `convnet` only)
+dropout | real or array | yes | 0.5 | Dropout rate between layers (templates, `mlp` and `convnet` only)
 regression | bool | yes | false | Whether the network is a regressor (templates, `mlp` and `convnet` only)
 autoencoder | bool | yes | false | Whether the network is an autoencoder (template `mlp` only)
 crop_size | int | yes | N/A | Size of random image crops as input to the net (templates and `convnet` only)
@@ -258,7 +270,7 @@ mirror | bool | yes | false | Whether to apply random mirroring of input images 
 finetuning | bool | yes | false | Whether to prepare neural net template for finetuning (requires `weights`)
 db | bool | yes | false | whether to set a database as input of neural net, useful for handling large datasets and training in constant-memory (requires `mlp` or `convnet`)
 scaling_temperature | real | yes | 1.0 | sets the softmax temperature of an existing network (e.g. useful for model calibration)
-loss | string | yes | N/A | Special network losses, from `dice`, `dice_multiclass`, `dice_weighted`, `dice_weighted_batch` or `dice_weighted_all`, useful for image segmentation
+loss | string | yes | N/A | Special network losses, from `dice`, `dice_multiclass`, `dice_weighted`, `dice_weighted_batch` or `dice_weighted_all`, useful for image segmentation, and `L1` or `L2`, useful for time-series via `csvts` connector
 
 See the [Model Templates](#model_templates) section for more details.
 
@@ -561,6 +573,23 @@ test_split | real | yes | 0 | Test split part of the dataset
 shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
 seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
 
+- CSV Time-series (`csvts`)
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+label | string | no | N/A | Label column name
+ignore | array of string | yes | empty | Array of column names to ignore
+label_offset | int | yes | 0 | Negative offset (e.g. -1) s othat labels range from 0 onward
+separator | string | yes | ',' | Column separator character
+id | string | yes | empty | Column name of the training examples identifier field, if any
+scale | bool | yes | false | Whether to scale all values into [0,1]
+min_vals,max_vals | array | yes | empty| Instead of `scale`, provide the scaling parameters, as returned from a training call
+db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
+test_split | real | yes | 0 | Test split part of the dataset
+shuffle | bool | yes | false | Whether to shuffle the training set (prior to splitting)
+seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random seeding)
+
+
 - Text (`txt`)
 
 Parameter | Type | Optional | Default | Description
@@ -606,7 +635,8 @@ gpuid | int or array | yes | 0 | GPU id, use single int for single GPU, `-1` for
 resume | bool | yes | false | Whether to resume training from .solverstate and .caffemodel files
 class_weights | array of float | yes | 1.0 everywhere | Whether to weight some classes more / less than others, e.g. [1.0,0.1,1.0]
 ignore_label | int | yes | N/A | A single label to be ignored by the loss (i.e. no gradients)
-timesteps  int | yes | N/A | Number of timesteps for recurrence (`ctc` / OCR) models 
+timesteps | int | yes | N/A | Number of timesteps for recurrence ('csvts', `ctc` OCR) models 
+offset | int | yes | N/A | Offset beween start point of sequences with connector `cvsts`, defining the overlap of input series
 
 Solver:
 

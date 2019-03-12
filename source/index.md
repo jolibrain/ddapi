@@ -428,7 +428,7 @@ dd.delete_service('myserv',clear='full')
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-clear | string | yes | mem | `full`, `lib`, `mem` or `dir`. `full` clears the model and service repository, `lib` removes model files only according to the behavior specified by the service's ML library, `mem` removes the service from memory without affecting the files, `dir` removes the whole directory
+clear | string | yes | mem | `full`, `lib`, `mem`, `dir` or `index`. `full` clears the model and service repository, `lib` removes model files only according to the behavior specified by the service's ML library, `mem` removes the service from memory without affecting the files, `dir` removes the whole directory, `index` removes the index when using similarity search.
 
 # Train
 

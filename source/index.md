@@ -344,6 +344,13 @@ nclasses | int | no (classification only) | N/A | Number of output classes (`sup
 inputlayer | string | yes | auto | network input layer name
 outputlayer | string | yes | auto | network output layer name
 
+- NCNN
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+inputblob | string | yes | data | network input blob name
+outputblob | string | yes | depends on network type (ie prob or rnn_pred or probs or detection_out) | network output blob name
+
+
 - Output Object
 
 Parameter | Type | Optional | Default | Description
@@ -988,3 +995,9 @@ test_batch_size | int | yes | N/A | Prediction batch size (the server iterates a
 inputlayer | string | yes | auto | network input layer name
 outputlayer | string | yes | auto | network output layer name
 extract_layer | string | yes | name of the neural net's inner layer to return as output. Requires the service to be declared as 'unsupervised' (subsumes `outputlayer` in an `unsupervised` service)
+
+- NCNN
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+inputblob | string | yes | data | network input blob name
+outputblob | string | yes | depends on network type (ie prob or rnn_pred or probs or detection_out) | ne

@@ -345,6 +345,7 @@ inputlayer | string | yes | auto | network input layer name
 outputlayer | string | yes | auto | network output layer name
 
 - NCNN
+
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 inputblob | string | yes | data | network input blob name
@@ -997,6 +998,7 @@ outputlayer | string | yes | auto | network output layer name
 extract_layer | string | yes | name of the neural net's inner layer to return as output. Requires the service to be declared as 'unsupervised' (subsumes `outputlayer` in an `unsupervised` service)
 
 - NCNN
+
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 inputblob | string | yes | data | network input blob name

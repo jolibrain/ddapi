@@ -658,6 +658,8 @@ test_interval | int | yes | N/A | Number of iterations between testing phases
 test_initialization | bool | true | N/A | Whether to start training by testing the network
 lr_policy | string | yes | N/A | learning rate policy ("step", "inv", "fixed", "sgdr", ...)
 base_lr | real | yes | N/A | Initial learning rate
+warmup_lr | real | yes | N/A | warmup starting learning rate (linearly goes to base_lr)
+warmup_iter | int | yes | 0 | number of warmup iterations
 gamma | real | yes | N/A | Learning rate drop factor
 stepsize | int | yes | N/A | Number of iterations between the dropping of the learning rate
 momentum | real | yes | N/A | Learning momentum

@@ -672,6 +672,8 @@ rand_skip | int | yes | 0 | Max number of images to skip when resuming training 
 lookahead | bool | yes | false | weither to use lookahead strategy from  https://arxiv.org/abs/1907.08610v1
 lookahead_steps | int | yes | 6 | number of lookahead steps for lookahead strategy
 lookahead_alpha | real | yes | 0.5 | size of step towards full lookahead 
+decoupled_wd_periods | int | yes | 4 | number of search periods for SGDW ADAMW AMSGRADW (periods end with a restart)
+decoupled_wd_mult | real | yes | 2.0 | muliplier of period for SGDW ADAMW AMSGRADW
 
 Note: most of the default values for the parameters above are to be found in the Caffe files describing a given neural network architecture, or within Caffe library, therefore regarded as N/A at DeepDetect level.
 

@@ -654,6 +654,7 @@ iterations | int | yes | N/A | Max number of solver's iterations
 snapshot | int | yes | N/A | Iterations between model snapshots
 snapshot_prefix | string | yes | empty | Prefix to snapshot file, supports repository
 solver_type | string | yes | SGD | from "SGD", "ADAGRAD", "NESTEROV", "RMSPROP", "ADADELTA", "ADAM",  "AMSGRAD", "ADAMW", "SGDW", "AMSGRADW" (*W version for decoupled weight decay)
+rectified | bool | yes | false | rectified momentum variance ie https://arxiv.org/abs/1908.03265 valid for ADAM[W] and AMSGRAD[W]
 test_interval | int | yes | N/A | Number of iterations between testing phases
 test_initialization | bool | true | N/A | Whether to start training by testing the network
 lr_policy | string | yes | N/A | learning rate policy ("step", "inv", "fixed", "sgdr", ...)

@@ -917,6 +917,7 @@ mean | float | yes | 128 | mean pixel value to be subtracted to input image (`te
 mean | array of int | yes | N/A | mean pixel value per channel to be subtracted to input image (`caffe` only)
 std | float | yes | 128 | standard pixel value deviation to be applied to input image (`tensorflow` only)
 segmentation | yes | yes | false | whether a segmentation service
+interp | string | yes | cubic | Image interpolation method (cubic, linear, nearest, lanczos4, area)
 
 - CSV (`csv`)
 

@@ -271,6 +271,12 @@ finetuning | bool | yes | false | Whether to prepare neural net template for fin
 db | bool | yes | false | whether to set a database as input of neural net, useful for handling large datasets and training in constant-memory (requires `mlp` or `convnet`)
 scaling_temperature | real | yes | 1.0 | sets the softmax temperature of an existing network (e.g. useful for model calibration)
 loss | string | yes | N/A | Special network losses, from `dice`, `dice_multiclass`, `dice_weighted`, `dice_weighted_batch` or `dice_weighted_all`, useful for image segmentation, and `L1` or `L2`, useful for time-series via `csvts` connector
+ssd_expand_prob | float | yes | between 0 and 1, probability of expanding the image (to improve detection of small/very small objects) 
+ssd_max_expand_ratio | float | yes | bbox zoom out ratio, e.g. 4.0 
+ssd_mining_type | str | yes | N/A | "HARD_EXAMPLE" or "MAX_NEGATIVE"
+ssd_neg_pos_ratio | float | yes | N/A | ratio of negative sampled examples wrt positive examples (bbox), e.g. 3.0
+ssd_neg_overlap | float | yes | N/A | max overlap of negative samples with positive samples (bbox), between 0 and 1, e.g. 0.5
+ssd_keep_top_k | float | yes | N/A | keep k examples after nms has finished
 
 See the [Model Templates](#model_templates) section for more details.
 

@@ -187,6 +187,7 @@ index_preload | bool | yes | true | Whether to preload a similarity search index
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 connector | string | No | N/A | Either "image" or "csv", defines the input data format
+timeout   | int | yes | 6000 | timeout on all predict calls for data retrieval
 
 Image (`image`)
 
@@ -909,6 +910,10 @@ data | array of strings | no | N/A | array of data URI over which to make predic
 #### Input Connectors
 
 Note: it is good practice to configure the `input` connector at service creation, and then leave it's parameters empty at `predict` time.
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+timeout   | int | yes | 6000 | timeout on predict call for data retrieval
 
 - Image (`image`)
 

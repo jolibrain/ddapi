@@ -924,6 +924,7 @@ mean | array of int | yes | N/A | mean pixel value per channel to be subtracted 
 std | float | yes | 128 | standard pixel value deviation to be applied to input image (`tensorflow` only)
 segmentation | yes | yes | false | whether a segmentation service
 interp | string | yes | cubic | Image interpolation method (cubic, linear, nearest, lanczos4, area)
+cuda | bool | yes | false | Whether to use CUDA to resize images (use USE_CUDA_CV=ON build flag)
 
 - CSV (`csv`)
 

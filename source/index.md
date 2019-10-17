@@ -957,7 +957,7 @@ No parameters
 
 #### Output
 
-Parameter | Type | Optional | Default | Description
+https://github.com/facebookresearch/faiss/wiki/Guidelines-toParameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 best | int | yes | 1 | Number of top predictions returned by data URI (supervised)
 template | string | yes | empty | Output template in Mustache format
@@ -967,9 +967,16 @@ confidence_threshold | double | yes | 0.0 | only returns classifications or dete
 bbox |  bool | yes | false | returns bounding boxes around object when using an object detection model, such that (xmin,ymax) yields the top left corner and (xmax,ymin) the lower right corner of a box.
 rois | string | yes | empty | set the ROI layer from which to extract the features from bounding boxes. Both the boxes and features ar returned when using an object detection model with ROI pooling layer
 index | bool | yes | false | whether to index the output from prediction, for similarity search
+index
 build_index | bool | yes | false | whether to build similarity index after prediction, no more indexing can be done afterward
 search | bool | yes | false | whether to use the predicted output for similarity search and return pre-indexed nearest neighbors
 multibox_rois | bool | false | aggregates bounding boxes ROIs features (requires `rois`) for image similarity search
+index_type | string | yes | Flat | for faiss index indexing backend only : a FAISS index factory string , see https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index
+index_gpu | bool | false |  for faiss indexing backend only : if available, build idnex on GPU
+index_gpuid | int | all | for faiss indexing backend only : which gpu to use if index_gpu is true
+train_samples | int | 100000 | for faiss indexing backend only :  number of samples to use for training index. Larger values lead to better indexes (more evenly distributed) but cause much larger index training time. Many indexes need a minimal value depending on the number of clusters built,  see https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index.
+ondisk | bool | true | for faiss indexing backend only :  try to directly build indexes on mmaped files (IVF index_types only can do so)
+nprobe | int | max(ninvertedlist/50,2) |  for faiss indexing backend only : number of cluster searched for closest images: for highly compressing indexes, setting nprobe to larger values may allow better precision
 ctc | bool | yes | false | whether the output is a sequence (using CTC encoding)
 confidences | array | yes | empty | Segmentation only: output confidence maps for "best" class, "all" classes, or classes being specified by number, e.g. "1","3".
 

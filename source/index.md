@@ -963,7 +963,7 @@ No parameters
 
 #### Output
 
-https://github.com/facebookresearch/faiss/wiki/Guidelines-toParameter | Type | Optional | Default | Description
+Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 best | int | yes | 1 | Number of top predictions returned by data URI (supervised)
 template | string | yes | empty | Output template in Mustache format

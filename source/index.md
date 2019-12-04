@@ -682,6 +682,7 @@ lookahead_steps | int | yes | 6 | number of lookahead steps for lookahead strate
 lookahead_alpha | real | yes | 0.5 | size of step towards full lookahead 
 decoupled_wd_periods | int | yes | 4 | number of search periods for SGDW ADAMW AMSGRADW (periods end with a restart)
 decoupled_wd_mult | real | yes | 2.0 | muliplier of period for SGDW ADAMW AMSGRADW
+lr_dropout | real | yes | 1.0 | learning rate dropout, as in https://arxiv.org/abs/1912.00144 1.0 means no dropout, 0.0 means no learning at all (this value is the probability of keeping computed value and not putting zero)
 
 Note: most of the default values for the parameters above are to be found in the Caffe files describing a given neural network architecture, or within Caffe library, therefore regarded as N/A at DeepDetect level.
 

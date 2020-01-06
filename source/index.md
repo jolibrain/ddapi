@@ -358,6 +358,17 @@ Parameter | Type | Optional | Default | Description
 inputblob | string | yes | data | network input blob name
 outputblob | string | yes | depends on network type (ie prob or rnn_pred or probs or detection_out) | network output blob name
 
+- TensorRT
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+tensorRTEngineFile | string | yes | "TRTengine_bs" | prefix of filename of TRT compiled model (complete name defaults to   "TRTengine_bs48")
+readEngine | bool | yes | true | if a compiled model file with corresponding prefix and batch size exists in repo, use it instead of recompiling a TRT model
+writeEngine | bool | yes | true | if a new TRT model was compiled, write it to disk
+maxWorkspaceSize | int | yes | 1 << 30 (1GB) | max memory usable by TRT during model compilation
+maxBatchSize | int | yes | 48 | maximum batch size processable by TRT compiled model 
+dla | int | true | -1 | id of DLA to use, if available on your hardware  
+datatype | string | true |  "fp32" | datatype inside compiled TRT model (available : "fp32", "fp16" (also known as half), "int8". "int8" is strongly discouraged at the moment as it has not been tested and needs a special procedure to calibrate quantization based on precise final task and representative data.  
 
 - Output Object
 
@@ -1030,4 +1041,5 @@ extract_layer | string | yes | name of the neural net's inner layer to return as
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 inputblob | string | yes | data | network input blob name
-outputblob | string | yes | depends on network type (ie prob or rnn_pred or probs or detection_out) | ne
+outputblob | string | yes | depends on network type (ie prob or rnn_pred or probs or detection_out) | network output blob name
+

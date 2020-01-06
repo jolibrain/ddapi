@@ -362,11 +362,11 @@ outputblob | string | yes | depends on network type (ie prob or rnn_pred or prob
 
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
-tensorRTEngineFile | string | yes | "TRTengine_bs" | prefix of filename of TRT compiled model (complete name defaults to   "TRTengine_bs48")
+tensorRTEngineFile | string | yes | "TRTengine" | prefix of filename of TRT compiled model (complete name defaults to   "TRTengine_bs48")
 readEngine | bool | yes | true | if a compiled model file with corresponding prefix, whatever batch size exists in repo, use it instead of recompiling a TRT model
 writeEngine | bool | yes | true | if a new TRT model was compiled, write it to disk
 maxWorkspaceSize | int | yes | 1024 | max memory (in MB) usable by TRT during model compilation. Usefull mainly on nano : 1024 is 1GB and may cause dede to be sigkilled if not enough memory. 256 allows to limit memory consumption and create low batchsize nets.
-maxBatchSize | int | yes | 48 | maximum batch size processable by TRT compiled model.  If a precompiled engine with corresponding tensorRTEngineFile name is present and readEngine is set to true , this previous engine is used, overriding this option.
+maxBatchSize | int | yes | 48 | maximum batch size processable by TRT compiled model.  If a precompiled engine starting with tensorRTEngineFile name is present and readEngine is set to true , this previous engine is used, overriding this option.
 dla | int | true | -1 | id of DLA to use, if available on your hardware  
 datatype | string | true |  "fp32" | datatype inside compiled TRT model (available : "fp32", "fp16" (also known as half), "int8". "int8" is strongly discouraged at the moment as it has not been tested and needs a special procedure to calibrate quantization based on precise final task and representative data.  
 

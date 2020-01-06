@@ -358,6 +358,17 @@ Parameter | Type | Optional | Default | Description
 inputblob | string | yes | data | network input blob name
 outputblob | string | yes | depends on network type (ie prob or rnn_pred or probs or detection_out) | network output blob name
 
+- TensorRT
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+tensorRTEngineFile | string | yes | "TRTengine" | prefix of filename of TRT compiled model (complete name defaults to   "TRTengine_bs48")
+readEngine | bool | yes | true | if a compiled model file with corresponding prefix, whatever batch size exists in repo, use it instead of recompiling a TRT model
+writeEngine | bool | yes | true | if a new TRT model was compiled, write it to disk
+maxWorkspaceSize | int | yes | 1024 | max memory (in MB) usable by TRT during model compilation. Usefull mainly on nano : 1024 is 1GB and may cause dede to be sigkilled if not enough memory. 256 allows to limit memory consumption and create low batchsize nets.
+maxBatchSize | int | yes | 48 | maximum batch size processable by TRT compiled model.  If a precompiled engine starting with tensorRTEngineFile name is present and readEngine is set to true , this previous engine is used, overriding this option.
+dla | int | true | -1 | id of DLA to use, if available on your hardware  
+datatype | string | true |  "fp32" | datatype inside compiled TRT model (available : "fp32", "fp16" (also known as half), "int8". "int8" is strongly discouraged at the moment as it has not been tested and needs a special procedure to calibrate quantization based on precise final task and representative data.  
 
 - Output Object
 
@@ -682,6 +693,7 @@ lookahead_steps | int | yes | 6 | number of lookahead steps for lookahead strate
 lookahead_alpha | real | yes | 0.5 | size of step towards full lookahead 
 decoupled_wd_periods | int | yes | 4 | number of search periods for SGDW ADAMW AMSGRADW (periods end with a restart)
 decoupled_wd_mult | real | yes | 2.0 | muliplier of period for SGDW ADAMW AMSGRADW
+lr_dropout | real | yes | 1.0 | learning rate dropout, as in https://arxiv.org/abs/1912.00144 1.0 means no dropout, 0.0 means no learning at all (this value is the probability of keeping computed value and not putting zero)
 
 Note: most of the default values for the parameters above are to be found in the Caffe files describing a given neural network architecture, or within Caffe library, therefore regarded as N/A at DeepDetect level.
 
@@ -1029,4 +1041,5 @@ extract_layer | string | yes | name of the neural net's inner layer to return as
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 inputblob | string | yes | data | network input blob name
-outputblob | string | yes | depends on network type (ie prob or rnn_pred or probs or detection_out) | ne
+outputblob | string | yes | depends on network type (ie prob or rnn_pred or probs or detection_out) | network output blob name
+

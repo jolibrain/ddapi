@@ -240,7 +240,12 @@ characters | bool | yes | false | character-level text processing, as opposed to
 sequence | int | yes | N/A | for character-level text processing, the fixed length of each sample of text
 read_forward | bool | yes | false | for character-level text processing, whether to read content from left to right
 alphabet | string | yes | abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]{} | for character-level text processing, the alphabet of recognized symbols
-sparse | bool | yes | false | whether to use sparse features (and sparce computations with Caffe for huge memory savings, for xgboost use `svm` connector instead) 
+sparse | bool | yes | false | whether to use sparse features (and sparce computations with Caffe for huge memory savings, for xgboost use `svm` connector instead)
+ordered_words | bool | yes | false | enable word-based processing with positionnal information, mandatory for bert/gpt2 like models
+wordpiece_tokens | bool | yes | false | set to true if vocabulary contains partial words, ie like in bert/gpt2 models
+punctuation_tokens | bool | yes | false | if true, treat each punctuation sign as a token; if false, punctuation is stripped from input
+word_start | string | yes | "" | in most gpt2 vocabularies, start of word has generally to be set to "Ġ". 
+suffix_start | string | yes | "##" | in bert-like vocabularies, suffixes are prefixed by `##`
 
 SVM (`svm`)
 
@@ -635,6 +640,12 @@ seed | int | yes | -1 | Shuffling seed for reproducible results (-1 for random s
 db | bool | yes | false | whether to gather data into a database, useful for very large datasets, allows training in constant-size memory
 sparse | bool | yes | false | whether to use sparse features (and sparce computations with Caffe for huge memory savings, for xgboost use `svm` connector instead)
 embedding | bool | yes | false | whether to use an embedding as input to the network (replaces one-hot vectors with straight indices)
+ordered_words | bool | yes | false | enable word-based processing with positionnal information, mandatory for bert/gpt2 like models
+wordpiece_tokens | bool | yes | false | set to true if vocabulary contains partial words, ie like in bert/gpt2 models
+punctuation_tokens | bool | yes | false | if true, treat each punctuation sign as a token; if false, punctuation is stripped from input
+word_start | string | yes | "" | in most gpt2 vocabularies, start of word has generally to be set to "Ġ". 
+suffix_start | string | yes | "##" | in most bert-like vocabularies, suffixes are prefixed by `##`
+
 
 - SVM (`svm`)
 
@@ -703,6 +714,39 @@ Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 batch_size | int | yes | N/A | Training batch size
 test_batch_size | int | yes | N/A | Testing batch size
+
+- Torch
+
+General:
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+gpu | bool | yes | false | whether to use gpu
+gpuid | int | yes | false |  id of gpu to use, defaults to -1 meaning all available
+nclasses | int | yes | none | if set to some int, add a classifier (linear/fullyConnected) with correposnding number of classes after torch traced model  
+self_supervised | string | yes | "" | self-supervised mode: "mask" for masked language model
+embedding_size | int | yes | 768 | embedding size for NLP models
+freeze_traced | bool | yes | false | Freeze the traced part of the net during finetuning (e.g. for classification)
+template | string | yes | "" | for language models, either "bert" or "gpt2"
+
+Solver:
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+iterations | int | yes | N/A | Max number of solver's iterations
+snapshot | int | yes | N/A | Iterations between model snapshots
+solver_type | string | yes | SGD | from "SGD", "ADAGRAD",  "RMSPROP", "ADAM"
+test_interval | int | yes | N/A | Number of iterations between testing phases
+base_lr | real | yes | N/A | Initial learning rate
+iter_size | int | yes | 1 | Number of passes (iter_size * batch_size) at every iteration
+
+Net:
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+batch_size | int | yes | N/A | Training batch size
+test_batch_size | int | yes | N/A | Testing batch size
+
 
 - Caffe2
 
@@ -1022,6 +1066,15 @@ Net:
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 test_batch_size | int | yes | N/A | Prediction batch size (the server iterates as many batches as necessary to predict over all posted data)
+
+- Torch
+
+Parameter | Type | Optional | Default | Description
+--------- | ---- | -------- | ------- | -----------
+gpu | bool | yes | false | Whether to use GPU
+gpuid | int | yes | -1 | GPU id, use single int for single GPU, `-1` for using all GPUs.
+extract_layer | string | yes | "" | in bert models "hidden_state" allows to extract raw hidden_states values to return as output. Requires the service to be declared as 'unsupervised'
+
 
 - XGBoost
 

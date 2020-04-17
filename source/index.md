@@ -656,7 +656,7 @@ No parameters
 Parameter | Type | Optional | Default | Description
 --------- | ---- | -------- | ------- | -----------
 best | int | yes | 1 | Number of top predictions returned by data URI (supervised)
-measure | array | yes | empty | Output measures requested, from `acc`: accuracy, `acc-k`: top-k accuracy, replace k with number (e.g. `acc-5`), `f1`: f1, precision and recall, `mcll`: multi-class log loss, `auc`: area under the curve, `cmdiag`: diagonal of confusion matrix (requires `f1`), `cmfull`: full confusion matrix (requires `f1`), `mcc`: Matthews correlation coefficient, `eucll`: euclidean distance (e.g. for regression tasks), `kl`: KL_divergence, `js`: JS divergence, `was`: Wasserstein, `ks`: Kolmogorov Smirnov, `dc`: distance correlation, `r2`: R2, `deltas`: delta scores
+measure | array | yes | empty | Output measures requested, from `acc`: accuracy, `acc-k`: top-k accuracy, replace k with number (e.g. `acc-5`), `f1`: f1, precision and recall, `mcll`: multi-class log loss, `auc`: area under the curve, `cmdiag`: diagonal of confusion matrix (requires `f1`), `cmfull`: full confusion matrix (requires `f1`), `mcc`: Matthews correlation coefficient, `eucll`: euclidean distance (e.g. for regression tasks), `kl`: KL_divergence, `js`: JS divergence, `was`: Wasserstein, `ks`: Kolmogorov Smirnov, `dc`: distance correlation, `r2`: R2, `deltas`: delta scores, 'raw': ouput raw results, in case of predict call, this requires a special deploy.prototxt that is a test network (to have ground truth)
 target_repository | string | yes | empty | target directory to which to copy the best model files once training has completed
 
 #### Machine learning libraries
@@ -1040,6 +1040,8 @@ ondisk | bool | true | for faiss indexing backend only :  try to directly build 
 nprobe | int | max(ninvertedlist/50,2) |  for faiss indexing backend only : number of cluster searched for closest images: for highly compressing indexes, setting nprobe to larger values may allow better precision
 ctc | bool | yes | false | whether the output is a sequence (using CTC encoding)
 confidences | array | yes | empty | Segmentation only: output confidence maps for "best" class, "all" classes, or classes being specified by number, e.g. "1","3".
+logits_blob | string  | yes | "" | in classification services, this add raw logits to output. Usefull for calibration purposes
+logits | bool | yes | False | in detection services, this add logits to output. Usefull for calibration purposes.
 
 - Network object
 

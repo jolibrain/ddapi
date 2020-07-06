@@ -693,6 +693,7 @@ warmup_lr | real | yes | N/A | warmup starting learning rate (linearly goes to b
 warmup_iter | int | yes | 0 | number of warmup iterations
 gamma | real | yes | N/A | Learning rate drop factor
 stepsize | int | yes | N/A | Number of iterations between the dropping of the learning rate
+stepvalue | array of int | yes | N/A | Iterations at which a learning rate change takes place, with `multistep` `lr_policy'
 momentum | real | yes | N/A | Learning momentum
 period | int | yes | -1 | N/A | Period in number of iterations with SGDR, best to use ncycles instead
 ncycles | int | yes | 1 | Number of restart cycles with SGDR

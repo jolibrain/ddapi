@@ -1,7 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (4.1.10)
+    activesupport (4.1.16)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -36,7 +36,7 @@ GEM
     hooks (0.4.0)
       uber (~> 0.0.4)
     i18n (0.7.0)
-    json (1.8.2)
+    json (1.8.6)
     kramdown (1.7.0)
     libv8 (3.16.14.7)
     listen (2.10.0)
@@ -76,7 +76,7 @@ GEM
     middleman-syntax (2.0.0)
       middleman-core (~> 3.2)
       rouge (~> 1.0)
-    minitest (5.6.1)
+    minitest (5.14.0)
     multi_json (1.11.0)
     padrino-helpers (0.12.5)
       i18n (~> 0.6, >= 0.6.7)
@@ -109,11 +109,11 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    thread_safe (0.3.5)
+    thread_safe (0.3.6)
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    tzinfo (1.2.2)
+    tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uber (0.0.13)
     uglifier (2.7.1)
